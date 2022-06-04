@@ -164,7 +164,7 @@ const onSubmit = () => {
                 name="username"
                 type="text"
                 placeholder="email"
-                class="input input-bordered"
+                class="input input-bordered input-secondary"
               />
             </div>
             <div class="form-control">
@@ -176,7 +176,7 @@ const onSubmit = () => {
                 name="password"
                 type="password"
                 placeholder="password"
-                class="input input-bordered"
+                class="input input-bordered input-secondary"
               />
               <!-- <label class="label">
                 <a href="#" class="label-text-alt link link-hover"

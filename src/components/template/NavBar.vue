@@ -49,7 +49,7 @@ getData();
       />
     </div>
   </div>
-  <nav class="bg-base-200 border-b border-gray-200 fixed z-30 w-full top-8">
+  <nav class="bg-base-200 border-b border-base-100 fixed z-30 w-full top-8">
     <div class="px-3 py-3 lg:px-5 lg:pl-3">
       <div class="flex items-center justify-between">
         <div class="flex items-center justify-start">

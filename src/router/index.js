@@ -4,11 +4,14 @@ import LandingLayout from '../layouts/LandingLayout.vue';
 import AdminLayout from '../layouts/AdminLayout.vue';
 // pages
 import NotFound from '../views/NotFound.vue';
+import Locked from '../views/Locked.vue';
+import Maintenance from '../views/Maintenance.vue';
 import LandingIndex from '../views/landing/LandingIndex.vue';
 import LandingLogin from '../views/landing/LandingLogin.vue';
 
 // admin
 import DashBoard from '../views/admin/DashBoard.vue'
+import AdminSiswa from '../views/admin/siswa/Index.vue'
 
 // testing
 // import TestingCetak1 from '../views/testing/TestingCetak1.vue'
@@ -35,6 +38,16 @@ const routes = [
         name: 'NotFound',
         component: NotFound,
       },
+      {
+        path: '/locked',
+        name: 'Locked',
+        component: Locked,
+      },
+      {
+        path: '/maintenance',
+        name: 'Maintenance',
+        component: Maintenance,
+      },
     ],
   },
   {
@@ -50,6 +63,11 @@ const routes = [
         path: '/pages/admin', 
         name: 'AdminDashboard',
         component: DashBoard,
+      },
+      {
+        path: '/pages/siswa', 
+        name: 'AdminSiswa',
+        component: AdminSiswa,
       },
     ]
   },

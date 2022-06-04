@@ -3,10 +3,10 @@
 <template>
   <div class="flex justify-center flex-col">
     <div class="flex justify-center">
-      <img src="@/assets/img/flat/404-error.png" />
+      <img src="@/assets/img/flat/maintenance.png" class="w-96 py-20" />
     </div>
     <div>
-      <p class="text-center font-bold text-2xl">Halaman tidak ditemukan!</p>
+      <p class="text-center font-bold text-2xl">Sedang dalam Perbaikan!</p>
       <router-link :to="{ name: 'LandingIndex' }">
         <p class="text-center font-bold text-2xl underline text-primary link">
           Beranda

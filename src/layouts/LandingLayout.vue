@@ -87,15 +87,15 @@ getData();
   <div
     v-if="isSidebarActive"
     id="aside"
-    class="z-10 top-0 block z-998 font-serif h-full fixed flex-row bg-base-200 text-base-content w-4/5 md:hidden shadow-xl border-r-2"
+    class="z-10 top-0 block z-998 font-serif h-full fixed flex-row bg-base-200 text-base-content w-4/5 md:hidden shadow-xl border-r-2 border-base-100"
   >
     <div class="px-2 ml-5 pt-0 pb-5 overflow-y-auto h-full">
       <router-link :to="{ name: 'LandingIndex' }">
-        <h1 class="text-xs text-gray-800 font-bold py-2 pt-6">Home</h1>
+        <h1 class="text-xs text-base-content font-bold py-2 pt-6">Home</h1>
       </router-link>
 
       <router-link :to="{ name: 'LandingLogin' }">
-        <h1 class="text-xs text-gray-800 font-bold py-2 pt-6">Login</h1>
+        <h1 class="text-xs text-base-content font-bold py-2 pt-6">Login</h1>
       </router-link>
 
       <!-- <h1 class="text-xs text-gray-400 font-bold py-2">Installation</h1> -->
@@ -144,7 +144,9 @@ getData();
     </div>
   </div>
 
-  <div class="border-b-2 top-10 relative bg-base-200 text-base-content">
+  <div
+    class="border-b-2 top-10 relative bg-base-200 text-base-content border-base-100"
+  >
     <div class="container max-w-4xl mx-auto font-serif">
       <div class="w-full">
         <div class="flex justify-between px-3 pt-2 pb-4">
@@ -158,7 +160,7 @@ getData();
               class="w-10 hover:shadow-lg"
             />
             <h3
-              class="pt-2 lg:pt-0 ml-4 mt-1 text-md font-bold text-gray-800 hover:text-sky-600 hover:underline"
+              class="pt-2 lg:pt-0 ml-4 mt-1 text-md font-bold text-base-content hover:link"
             >
               YPMT PSIKOTEST
             </h3></router-link
@@ -168,37 +170,37 @@ getData();
               <div class="flex justify-end gap-10 pt-2">
                 <router-link
                   :to="{ name: 'LandingIndex' }"
-                  class="text-gray-800 font-normal text-sm hover:text-sky-600 hover:underline"
+                  class="text-base-content font-normal text-sm hover:link"
                   >Home</router-link
                 >
 
                 <!-- <a
                   href="#paket"
-                  class="text-gray-800 font-normal text-sm hover:text-sky-600 hover:underline"
+                  class=" text-base-content font-normal text-sm   hover:link"
                   >Paket</a
                 > -->
                 <router-link
                   :to="{ name: 'LandingLogin' }"
-                  class="text-gray-800 font-normal text-sm hover:text-sky-600 hover:underline"
+                  class="text-base-content font-normal text-sm hover:link"
                   >Sekolah</router-link
                 >
                 <router-link
                   :to="{ name: 'LandingLogin' }"
-                  class="text-gray-800 font-normal text-sm hover:text-sky-600 hover:underline"
+                  class="text-base-content font-normal text-sm hover:link"
                   >Yayasan</router-link
                 >
                 <router-link
                   :to="{ name: 'LandingIndex' }"
-                  class="text-gray-800 font-normal text-sm hover:text-sky-600 hover:underline"
+                  class="text-base-content font-normal text-sm hover:link"
                   >Siswa</router-link
                 >
                 <router-link
                   :to="{ name: 'LandingIndex' }"
-                  class="text-gray-800 font-normal text-sm hover:text-sky-600 hover:underline"
+                  class="text-base-content font-normal text-sm hover:link"
                   >Wali Murid</router-link
                 >
 
-                <!-- <a href="https://github.com/godgodwinter" target="blank" class="text-gray-800 font-semibold text-sm hover:text-vue-600 hover:underline">Github </a> -->
+                <!-- <a href="https://github.com/godgodwinter" target="blank" class=" text-base-content font-semibold text-sm hover:text-vue-600 hover:link">Github </a> -->
               </div>
             </div>
 
