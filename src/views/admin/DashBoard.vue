@@ -1,24 +1,34 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed, watch } from "vue";
 import BreadCrumb from "@/components/atoms/BreadCrumb.vue";
 import BreadCrumbSpace from "@/components/atoms/BreadCrumbSpace.vue";
 import { Field, Form } from "vee-validate";
 import { useStoreAdminBar } from "@/stores/adminBar";
+import { useStoreGuruBk } from "@/stores/guruBk";
+
+import moment from "moment/min/moment-with-locales";
+import localization from "moment/locale/id";
+
+moment.updateLocale("id", localization);
+const storeGuruBk = useStoreGuruBk();
 const storeAdminBar = useStoreAdminBar();
 storeAdminBar.setPagesActive("dashboard");
+
+const getPaket = computed(() => storeGuruBk.getPaket);
+const getStats = computed(() => storeGuruBk.getStats);
+const getSekolah = computed(() => storeGuruBk.getSekolah);
 const data = ref([]);
 const dataDetail = ref({
-  nama: "",
-  alamat: "",
-  status: "",
-  kepsek_nama: "",
-  tahunajaran_nama: "",
-  semester_nama: "",
-  kecamatan: "",
-  kabupaten: "",
-  provinsi: "",
+  nama: getSekolah.value.nama,
+  alamat: getSekolah.value.alamat,
+  status: getSekolah.value.status ? getSekolah.value.status : "Aktif",
+  kepsek_nama: getSekolah.value.kepsek_nama,
+  tahunajaran_nama: getSekolah.value.tahunajaran_nama,
+  semester_nama: getSekolah.value.semester_nama,
+  kecamatan: getSekolah.value.kecamatan,
+  kabupaten: getSekolah.value.kabupaten,
+  provinsi: getSekolah.value.provinsi,
 });
-
 // validasi
 const validateData = (value) => {
   if (!value) {
@@ -32,6 +42,20 @@ const validateData = (value) => {
 const onSubmit = () => {
   // const res = doStoreData();
 };
+// vue pinia watch
+storeGuruBk.$subscribe((mutation, state) => {
+  dataDetail.value = {
+    nama: getSekolah.value.nama,
+    alamat: getSekolah.value.alamat,
+    status: getSekolah.value.status ? getSekolah.value.status : "Aktif",
+    kepsek_nama: getSekolah.value.kepsek_nama,
+    tahunajaran_nama: getSekolah.value.tahunajaran_nama,
+    semester_nama: getSekolah.value.semester_nama,
+    kecamatan: getSekolah.value.kecamatan,
+    kabupaten: getSekolah.value.kabupaten,
+    provinsi: getSekolah.value.provinsi,
+  };
+});
 </script>
 <template>
   <div class="pt-4 px-10 md:flex justify-between">
@@ -75,8 +99,14 @@ const onSubmit = () => {
     <div class="stats shadow">
       <div class="stat">
         <div class="stat-title">Jenis Paket :</div>
-        <div class="stat-value">Kelas Premium</div>
-        <div class="stat-desc">Last Updated : 21 Juni 2022</div>
+        <div class="stat-value">Kelas {{ getPaket.nama }}</div>
+        <div class="stat-desc">
+          Last Updated :
+          {{
+            moment(getSekolah.updated_at, "YYYY-MM-DD").format(" Do MMM YYYY")
+          }}
+          <!-- {{ getSekolah.updated_at }} -->
+        </div>
       </div>
     </div>
   </div>
@@ -99,8 +129,8 @@ const onSubmit = () => {
           </svg>
         </div>
         <div class="stat-title">Kelas</div>
-        <div class="stat-value">31K</div>
-        <div class="stat-desc">Last Updated : 21 Juni 2022</div>
+        <div class="stat-value">{{ getStats.kelas }} Kelas</div>
+        <!-- <div class="stat-desc">Last Updated : 21 Juni 2022</div> -->
       </div>
 
       <div class="stat">
@@ -120,8 +150,8 @@ const onSubmit = () => {
           </svg>
         </div>
         <div class="stat-title">Siswa</div>
-        <div class="stat-value">4,200</div>
-        <div class="stat-desc">Last Updated : 21 Juni 2022</div>
+        <div class="stat-value">{{ getStats.siswa }} Siswa</div>
+        <!-- <div class="stat-desc">Last Updated : 21 Juni 2022</div> -->
       </div>
 
       <div class="stat">
@@ -140,9 +170,9 @@ const onSubmit = () => {
             ></path>
           </svg>
         </div>
-        <div class="stat-title">Guru</div>
-        <div class="stat-value">1,200</div>
-        <div class="stat-desc">Last Updated : 20 Juni 2022</div>
+        <div class="stat-title">Walikelas</div>
+        <div class="stat-value">{{ getStats.walikelas }}</div>
+        <!-- <div class="stat-desc">Last Updated : 20 Juni 2022</div> -->
       </div>
     </div>
   </div>
@@ -209,7 +239,7 @@ const onSubmit = () => {
                           class="select select-bordered w-full max-w-xs"
                           disabled
                         >
-                          <option disabled selected>Pilih Status ?</option>
+                          <!-- <option disabled selected>Pilih Status ?</option> -->
                           <option>Aktif</option>
                           <option>Nonaktif</option>
                         </select>

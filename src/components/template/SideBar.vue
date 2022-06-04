@@ -1,7 +1,9 @@
 <script setup>
+import Api from "@/axios/axios";
 import { computed } from "vue";
 import { useStoreAdminBar } from "@/stores/adminBar";
 import { useStoreAuth } from "@/stores/auth";
+import { useStoreGuruBk } from "@/stores/guruBk";
 import { useRouter, useRoute } from "vue-router";
 import { ref } from "vue";
 const router = useRouter();
@@ -14,7 +16,10 @@ async function goLogout() {
   router.go();
 }
 const storeAuth = useStoreAuth();
+const storeGuruBk = useStoreGuruBk();
 const getIsLogin = computed(() => storeAuth.getIsLogin);
+
+const getIdentitas = computed(() => storeGuruBk.getIdentitas);
 // const getToken = computed(() => storeAuth.getToken);
 if (getIsLogin.value == false) {
   //logout
@@ -23,6 +28,25 @@ if (getIsLogin.value == false) {
 const pagesActiveClass = ref(
   "border border-primary rounded-lg bg-primary text-primary-content"
 );
+
+const getData = async () => {
+  try {
+    const response = await Api.post(`gurubk/auth/me`);
+    storeGuruBk.setIdentitas(response.identitas);
+    storeGuruBk.setSekolah(response.sekolah);
+    storeGuruBk.setPaket(response.paket);
+    storeGuruBk.setStats(response.stats);
+    // data.value = response.data;
+    // data.value.map((item, index) => {
+    // arr.value.push(item.penjelasan);
+    // });
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+getData();
 </script>
 <template>
   <aside
@@ -62,10 +86,12 @@ const pagesActiveClass = ref(
                 <p
                   class="text-base-content text-md font-semibold text-center py-2"
                 >
-                  Paijo
+                  {{ getIdentitas.nama }}
                 </p>
-                <p class="text-base-content text-sm font-medium text-center">
-                  Admin
+                <p
+                  class="text-base-content text-sm font-medium text-center link link-primary"
+                >
+                  User Sekolah
                 </p>
               </div>
             </li>
