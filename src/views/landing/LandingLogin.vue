@@ -13,7 +13,7 @@ const password = ref();
 
 const doLogin = async (username, password) => {
   try {
-    const response = await Api.post("admin/auth/login", {
+    const response = await Api.post("gurubk/auth/login", {
       email: username,
       password,
     });
@@ -147,7 +147,7 @@ const onSubmit = () => {
     </div>
   </div> -->
   <div class="">
-    <div class="hero bg-base-200 py-32">
+    <div class="hero bg-base-100 py-32">
       <div class="hero-content flex-col lg:flex-row-reverse">
         <div class="text-center lg:text-left">
           <h1 class="text-5xl font-bold">Menu Sekolah</h1>
@@ -160,6 +160,8 @@ const onSubmit = () => {
                 <span class="label-text">Email / Username</span>
               </label>
               <input
+                v-model="email"
+                name="username"
                 type="text"
                 placeholder="email"
                 class="input input-bordered"
@@ -170,7 +172,9 @@ const onSubmit = () => {
                 <span class="label-text">Password</span>
               </label>
               <input
-                type="text"
+                v-model="password"
+                name="password"
+                type="password"
                 placeholder="password"
                 class="input input-bordered"
               />
@@ -181,7 +185,7 @@ const onSubmit = () => {
               </label> -->
             </div>
             <div class="form-control mt-6">
-              <button class="btn btn-primary">Login</button>
+              <button class="btn btn-primary" @click="onSubmit()">Login</button>
             </div>
           </div>
         </div>

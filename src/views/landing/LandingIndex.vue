@@ -5,53 +5,33 @@ import ButtonTwo from "../../components/atoms/ButtonTwo.vue";
 <template>
   <div class="py-20 lg:py-10 max-w-4xl mx-auto">
     <div class="hero min-h-96 bg-base-100">
-      <div class="hero-content flex-col justify-center lg:flex-row-reverse">
-        <div
+      <div
+        class="hero-content flex-col justify-between lg:flex-row-reverse w-full"
+      >
+        <img
+          src="@/assets/img/other/img-landing2.svg"
+          class="max-w-sm rounded-lg shadow-sm"
+        />
+
+        <!-- <div
           class="h-96 w-full carousel carousel-vertical rounded-box flex justify-center items-center"
         >
           <div class="carousel-item h-full">
-            <img
-              src="https://api.lorem.space/image/game?w=256&h=400&hash=8B7BCDC2"
-            />
+            <img src="@/assets/img/other/img-landing2.svg" />
           </div>
           <div class="carousel-item h-full">
-            <img
-              src="https://api.lorem.space/image/game?w=256&h=400&hash=500B67FB"
-            />
+            <img src="@/assets/img/other/img-landing2.svg" />
           </div>
-          <div class="carousel-item h-full">
-            <img
-              src="https://api.lorem.space/image/game?w=256&h=400&hash=A89D0DE6"
-            />
-          </div>
-          <div class="carousel-item h-full">
-            <img
-              src="https://api.lorem.space/image/game?w=256&h=400&hash=225E6693"
-            />
-          </div>
-          <div class="carousel-item h-full">
-            <img
-              src="https://api.lorem.space/image/game?w=256&h=400&hash=9D9539E7"
-            />
-          </div>
-          <div class="carousel-item h-full">
-            <img
-              src="https://api.lorem.space/image/game?w=256&h=400&hash=BDC01094"
-            />
-          </div>
-          <div class="carousel-item h-full">
-            <img
-              src="https://api.lorem.space/image/game?w=256&h=400&hash=7F5AE56A"
-            />
-          </div>
-        </div>
+        </div> -->
         <div>
           <h1 class="text-5xl font-bold">Yayasan Pelita Multi Talenta</h1>
           <p class="py-6">
             Kantor Operasional Teratai No. 10 Sekretariat Letjen Sutoyo V Malang
             - Jawa Timur
           </p>
-          <button class="btn btn-primary">Get Started</button>
+          <router-link :to="{ name: 'LandingLogin' }">
+            <button class="btn btn-primary">Get Started</button></router-link
+          >
         </div>
       </div>
     </div>

@@ -35,9 +35,9 @@ const getData = async () => {
 getData();
 </script>
 <template>
-  <div class="static bg-white" v-if="!isSidebarActive">
+  <div class="static bg-base-100" v-if="!isSidebarActive">
     <div
-      class="fixed z-50 w-full font-serif font-semibold text-sm bg-slate-700 text-white flex justify-center py-2 px-4 text-center"
+      class="fixed z-50 w-full font-serif font-semibold text-sm text-base-200 bg-base-content flex justify-center py-2 px-4 text-center"
     >
       <VueWriter
         v-if="arr.length > 0"
@@ -49,7 +49,7 @@ getData();
       />
     </div>
   </div>
-  <nav class="bg-white border-b border-gray-200 fixed z-30 w-full top-8">
+  <nav class="bg-base-200 border-b border-gray-200 fixed z-30 w-full top-8">
     <div class="px-3 py-3 lg:px-5 lg:pl-3">
       <div class="flex items-center justify-between">
         <div class="flex items-center justify-start">

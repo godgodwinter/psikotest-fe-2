@@ -4,6 +4,7 @@ import { computed } from "vue";
 import { useCounterStore } from "@/stores/counter";
 import Toast from "@/components/lib/Toast";
 import Api from "@/axios/axios";
+import Footer from "@/components/template/Footer.vue";
 
 const storeCounter = useCounterStore();
 const counter = computed(() => storeCounter.count);
@@ -86,7 +87,7 @@ getData();
   <div
     v-if="isSidebarActive"
     id="aside"
-    class="z-10 top-0 block z-998 font-serif h-full fixed flex-row bg-base-100 w-4/5 md:hidden shadow-xl border-r-2"
+    class="z-10 top-0 block z-998 font-serif h-full fixed flex-row bg-base-200 text-base-content w-4/5 md:hidden shadow-xl border-r-2"
   >
     <div class="px-2 ml-5 pt-0 pb-5 overflow-y-auto h-full">
       <router-link :to="{ name: 'LandingIndex' }">
@@ -143,7 +144,7 @@ getData();
     </div>
   </div>
 
-  <div class="border-b-2 top-10 relative">
+  <div class="border-b-2 top-10 relative bg-base-200 text-base-content">
     <div class="container max-w-4xl mx-auto font-serif">
       <div class="w-full">
         <div class="flex justify-between px-3 pt-2 pb-4">
@@ -171,11 +172,11 @@ getData();
                   >Home</router-link
                 >
 
-                <a
+                <!-- <a
                   href="#paket"
                   class="text-gray-800 font-normal text-sm hover:text-sky-600 hover:underline"
                   >Paket</a
-                >
+                > -->
                 <router-link
                   :to="{ name: 'LandingLogin' }"
                   class="text-gray-800 font-normal text-sm hover:text-sky-600 hover:underline"
@@ -241,7 +242,8 @@ getData();
   <main class="font-serif md:min-h-screen pt-10 lg:pt-10">
     <router-view />
   </main>
-  <footer class="footer items-center p-4 bg-neutral text-neutral-content">
+  <Footer />
+  <!-- <footer class="footer items-center p-4 bg-neutral text-neutral-content">
     <div class="items-center grid-flow-col">
       <svg
         width="36"
@@ -297,5 +299,5 @@ getData();
           ></path></svg
       ></a>
     </div>
-  </footer>
+  </footer> -->
 </template>
