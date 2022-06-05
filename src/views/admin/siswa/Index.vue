@@ -4,9 +4,11 @@ import { ref } from "vue";
 import BreadCrumb from "@/components/atoms/BreadCrumb.vue";
 import BreadCrumbSpace from "@/components/atoms/BreadCrumbSpace.vue";
 import ButtonEdit from "@/components/atoms/ButtonEdit.vue";
+import { useRouter } from "vue-router";
 import { useStoreAdminBar } from "@/stores/adminBar";
 const storeAdminBar = useStoreAdminBar();
 storeAdminBar.setPagesActive("siswa");
+const router = useRouter();
 
 let pilihKelas = ref([
   {
@@ -71,6 +73,22 @@ const columns = [
   },
 ];
 
+const getDataKelas = async () => {
+  try {
+    const response = await Api.get(`gurubk/kelas`);
+    dataKelas.value = response.data;
+    dataKelas.value.forEach((item) => {
+      pilihKelas.value.push({
+        label: `${item.nama} (${item.jml_siswa} siswa)`,
+        id: item.id,
+      });
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+getDataKelas();
+
 const getData = async () => {
   try {
     const response = await Api.get(`gurubk/siswa`);
@@ -83,6 +101,48 @@ const getData = async () => {
   }
 };
 getData();
+
+const doEditData = async (id) => {
+  router.push({ name: "AdminSiswaEdit", params: { id } });
+};
+
+const doPilihKelas = () => {
+  if (inputCariKelas.value.id === "Semua Kelas") {
+    data.value = dataAsli.value.map((item, index) => {
+      return {
+        ...item,
+        nama: item.nama,
+        username: item.username,
+        passworddefault: item.passworddefault,
+      };
+    });
+  } else if (inputCariKelas.value.id === "Belum masuk Kelas") {
+    let dataFiltered = dataAsli.value.filter((item) => {
+      return item.kelas === null;
+    });
+    data.value = dataFiltered.map((item, index) => {
+      return {
+        ...item,
+        nama: item.nama,
+        kelas_nama: "Belum Masuk Kelas",
+        username: item.username,
+        passworddefault: item.passworddefault,
+      };
+    });
+  } else {
+    let dataFiltered = dataAsli.value.filter((item) => {
+      return item.kelas_id == inputCariKelas.value.id;
+    });
+    data.value = dataFiltered.map((item, index) => {
+      return {
+        ...item,
+        nama: item.nama,
+        username: item.username,
+        passworddefault: item.passworddefault,
+      };
+    });
+  }
+};
 </script>
 <template>
   <div class="pt-4 px-10 md:flex justify-between">

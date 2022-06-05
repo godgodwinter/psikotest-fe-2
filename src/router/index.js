@@ -12,6 +12,7 @@ import LandingLogin from '../views/landing/LandingLogin.vue';
 // admin
 import DashBoard from '../views/admin/DashBoard.vue'
 import AdminSiswa from '../views/admin/siswa/Index.vue'
+import AdminSiswaEdit from '../views/admin/siswa/Edit.vue'
 
 // testing
 // import TestingCetak1 from '../views/testing/TestingCetak1.vue'
@@ -68,6 +69,11 @@ const routes = [
         path: '/pages/siswa', 
         name: 'AdminSiswa',
         component: AdminSiswa,
+      },
+      {
+        path: '/pages/siswa/:id', 
+        name: 'AdminSiswaEdit',
+        component: AdminSiswaEdit,
       },
     ]
   },
