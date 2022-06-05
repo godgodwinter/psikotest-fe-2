@@ -218,7 +218,7 @@ getData();
               :class="[pagesActive == 'pengguna' ? pagesActiveClass : '']"
             >
               <router-link
-                :to="{ name: 'AdminDashboard' }"
+                :to="{ name: 'AdminPengguna' }"
                 class="text-base-content font-normal rounded-lg flex items-center p-2 group hover:link"
               >
                 <svg
