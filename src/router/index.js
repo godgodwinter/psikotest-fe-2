@@ -13,6 +13,8 @@ import LandingLogin from '../views/landing/LandingLogin.vue';
 import DashBoard from '../views/admin/DashBoard.vue'
 import AdminSiswa from '../views/admin/siswa/Index.vue'
 import AdminSiswaEdit from '../views/admin/siswa/Edit.vue'
+import AdminKelas from '../views/admin/kelas/Index.vue'
+import AdminKelasEdit from '../views/admin/kelas/Edit.vue'
 
 // testing
 // import TestingCetak1 from '../views/testing/TestingCetak1.vue'
@@ -74,6 +76,16 @@ const routes = [
         path: '/pages/siswa/:id', 
         name: 'AdminSiswaEdit',
         component: AdminSiswaEdit,
+      },
+      {
+        path: '/pages/kelas', 
+        name: 'AdminKelas',
+        component: AdminKelas,
+      },
+      {
+        path: '/pages/kelas/:id', 
+        name: 'AdminKelasEdit',
+        component: AdminKelasEdit,
       },
     ]
   },
