@@ -7,7 +7,7 @@ import ButtonEdit from "@/components/atoms/ButtonEdit.vue";
 import { useRouter } from "vue-router";
 import { useStoreAdminBar } from "@/stores/adminBar";
 const storeAdminBar = useStoreAdminBar();
-storeAdminBar.setPagesActive("kelas");
+storeAdminBar.setPagesActive("walikelas");
 const router = useRouter();
 
 let pilihKelas = ref([
@@ -52,13 +52,8 @@ const columns = [
     type: "String",
   },
   {
-    label: "Nama Walikelas",
-    field: "walikelas_nama",
-    type: "String",
-  },
-  {
-    label: "Jumlah Siswa",
-    field: "jml_siswa",
+    label: "Jumlah Kelas",
+    field: "jml_kelas",
     type: "String",
   },
 ];
@@ -81,7 +76,7 @@ getDataKelas();
 
 const getData = async () => {
   try {
-    const response = await Api.get(`gurubk/kelas`);
+    const response = await Api.get(`gurubk/walikelas`);
     dataAsli.value = response.data;
     data.value = response.data;
 
@@ -93,7 +88,7 @@ const getData = async () => {
 getData();
 
 const doEditData = async (id) => {
-  router.push({ name: "AdminKelasEdit", params: { id } });
+  router.push({ name: "AdminWaliKelasEdit", params: { id } });
 };
 </script>
 <template>
@@ -101,12 +96,14 @@ const doEditData = async (id) => {
     <div>
       <span
         class="text-2xl sm:text-3xl leading-none font-bold text-base-content shadow-sm"
-        >Kelas</span
+        >Wali Kelas</span
       >
     </div>
     <div class="md:py-0 py-4">
       <BreadCrumb>
-        <template v-slot:content> Kelas <BreadCrumbSpace /> Index </template>
+        <template v-slot:content>
+          WaliKelas <BreadCrumbSpace /> Index
+        </template>
       </BreadCrumb>
     </div>
   </div>
@@ -140,8 +137,8 @@ const doEditData = async (id) => {
               <span v-else-if="props.column.field == 'no'">
                 <div class="text-center">{{ props.index + 1 }}</div>
               </span>
-              <span v-else-if="props.column.field == 'jml_siswa'">
-                <div class="text-left">{{ props.row.jml_siswa }} Siswa</div>
+              <span v-else-if="props.column.field == 'jml_kelas'">
+                <div class="text-left">{{ props.row.jml_kelas }} Kelas</div>
               </span>
 
               <span v-else>

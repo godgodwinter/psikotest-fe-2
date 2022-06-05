@@ -15,6 +15,8 @@ import AdminSiswa from '../views/admin/siswa/Index.vue'
 import AdminSiswaEdit from '../views/admin/siswa/Edit.vue'
 import AdminKelas from '../views/admin/kelas/Index.vue'
 import AdminKelasEdit from '../views/admin/kelas/Edit.vue'
+import AdminWaliKelas from '../views/admin/walikelas/Index.vue'
+import AdminWaliKelasEdit from '../views/admin/walikelas/Edit.vue'
 
 // testing
 // import TestingCetak1 from '../views/testing/TestingCetak1.vue'
@@ -86,6 +88,16 @@ const routes = [
         path: '/pages/kelas/:id', 
         name: 'AdminKelasEdit',
         component: AdminKelasEdit,
+      },
+      {
+        path: '/pages/walikelas', 
+        name: 'AdminWaliKelas',
+        component: AdminWaliKelas,
+      },
+      {
+        path: '/pages/walikelas/:id', 
+        name: 'AdminWaliKelasEdit',
+        component: AdminWaliKelasEdit,
       },
     ]
   },
