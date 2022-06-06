@@ -5,6 +5,15 @@ import { useStoreAdminBar } from "@/stores/adminBar";
 import { useRouter, useRoute } from "vue-router";
 import Api from "@/axios/axios";
 import Toast from "@/components/lib/Toast";
+
+import { useStoreGuruBk } from "@/stores/guruBk";
+const storeGuruBk = useStoreGuruBk();
+const paket = computed(() => storeGuruBk.getPaket);
+storeGuruBk.$subscribe((mutation, state) => {
+  // console.log(mutation, state);
+  // console.log(paket.value);
+});
+
 const router = useRouter();
 const storeAdminBar = useStoreAdminBar();
 const toggleSideBar = () => {
@@ -97,141 +106,14 @@ getData();
               >PELITA MULTI TALENTA</span
             >
           </a>
-          <!-- <form action="#" method="GET" class="hidden lg:block lg:pl-32">
-            <label for="topbar-search" class="sr-only">Search</label>
-            <div class="mt-1 relative lg:w-64">
-              <div
-                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
-              >
-                <svg
-                  class="w-5 h-5 text-gray-500"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-              </div>
-              <input
-                autocomplete="off"
-                type="text"
-                name="email"
-                id="topbar-search"
-                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pl-10 p-2.5"
-                placeholder="Search"
-              />
-            </div>
-          </form> -->
         </div>
         <div class="flex items-center">
-          <!-- <button
-            @click="toggleSideBar()"
-            id="toggleSidebarMobileSearch"
-            type="button"
-            class="lg:hidden text-gray-500 hover:text-gray-900 hover:bg-gray-100 p-2 rounded-lg"
-          >
-            <span class="sr-only">Search</span>
-            <svg
-              class="w-6 h-6"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                clip-rule="evenodd"
-              />
-            </svg>
-          </button> -->
           <div class="hidden lg:flex items-center">
-            <!-- <VueWriter
-              :array="arr"
-              :eraseSpeed="50"
-              :typeSpeed="40"
-              :delay="5000"
-              :intervals="500"
-            /> -->
-            <!-- <span class="text-base font-normal text-gray-500 mr-5">Open source ❤️ </span> -->
+            <span class="text-base font-bold uppercase text-gray-500 mr-5"
+              >Paket {{ paket.nama }} ❤️
+            </span>
             <div class="-mb-1">
-              <div>
-                <!-- <button
-                  @click="
-                    {
-                      toggleMenu();
-                    }
-                  "
-                  id="dropdownDefault"
-                  data-dropdown-toggle="dropdown"
-                  class="hidden sm:inline-flex ml-5 text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center mr-3"
-                  type="button"
-                >
-                  <svg
-                    class="fill-current"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 22c-3.123 0-5.914-1.441-7.749-3.69.259-.588.783-.995 1.867-1.246 2.244-.518 4.459-.981 3.393-2.945-3.155-5.82-.899-9.119 2.489-9.119 3.322 0 5.634 3.177 2.489 9.119-1.035 1.952 1.1 2.416 3.393 2.945 1.082.25 1.61.655 1.871 1.241-1.836 2.253-4.628 3.695-7.753 3.695z"
-                    />
-                  </svg>
-                  <p class="mx-2" v-if="dataAuth">{{ dataAuth.name }}</p>
-                  <p class="mx-2" v-else>Name</p>
-                  <svg
-                    class="ml-2 w-4 h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </button> -->
-                <!-- Dropdown menu -->
-                <!-- <div
-                  v-if="isMenuActive"
-                  class="absolute z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700"
-                >
-                  <ul
-                    class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                    aria-labelledby="dropdownDefault"
-                  >
-                    <li>
-                      <a
-                        href="#"
-                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                        >Dashboard</a
-                      >
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                        >Settings</a
-                      >
-                    </li>
-                    <li>
-                      <button
-                        @click="goLogout()"
-                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Sign out
-                      </button>
-                    </li>
-                  </ul>
-                </div> -->
-              </div>
+              <div></div>
             </div>
           </div>
         </div>

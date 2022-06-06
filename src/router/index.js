@@ -23,6 +23,7 @@ import AdminPenggunaEdit from '../views/admin/pengguna/Edit.vue'
 import AdminHasilPsikologi from '../views/admin/hasilpsikologi/Index.vue'
 import AdminHasilPsikologiDeteksi from '../views/admin/hasilpsikologi/Deteksi.vue'
 import AdminHasilPsikologiPenanganan from '../views/admin/hasilpsikologi/Penanganan.vue'
+// import AdminHasilPsikologiSertifikat from '../views/admin/hasilpsikologi/Sertifikat_backup.vue'
 import AdminHasilPsikologiSertifikat from '../views/admin/hasilpsikologi/Sertifikat.vue'
 import AdminHasilPsikologiTerapis from '../views/admin/hasilpsikologi/Terapis.vue'
 // nilaipsikologi
@@ -48,12 +49,12 @@ const routes = [
     redirect: '/',
     children: [
       {
-        path: '/', 
+        path: '/',
         name: 'LandingIndex',
         component: LandingIndex,
       },
       {
-        path: '/login', 
+        path: '/login',
         name: 'LandingLogin',
         component: LandingLogin,
       },
@@ -84,117 +85,117 @@ const routes = [
     redirect: '/pages/admin',
     children: [
       {
-        path: '/pages/admin', 
+        path: '/pages/admin',
         name: 'AdminDashboard',
         component: DashBoard,
       },
       {
-        path: '/pages/siswa', 
+        path: '/pages/siswa',
         name: 'AdminSiswa',
         component: AdminSiswa,
       },
       {
-        path: '/pages/siswa/:id', 
+        path: '/pages/siswa/:id',
         name: 'AdminSiswaEdit',
         component: AdminSiswaEdit,
       },
       {
-        path: '/pages/kelas', 
+        path: '/pages/kelas',
         name: 'AdminKelas',
         component: AdminKelas,
       },
       {
-        path: '/pages/kelas/:id', 
+        path: '/pages/kelas/:id',
         name: 'AdminKelasEdit',
         component: AdminKelasEdit,
       },
       {
-        path: '/pages/walikelas', 
+        path: '/pages/walikelas',
         name: 'AdminWaliKelas',
         component: AdminWaliKelas,
       },
       {
-        path: '/pages/walikelas/:id', 
+        path: '/pages/walikelas/:id',
         name: 'AdminWaliKelasEdit',
         component: AdminWaliKelasEdit,
       },
       {
-        path: '/pages/pengguna', 
+        path: '/pages/pengguna',
         name: 'AdminPengguna',
         component: AdminPengguna,
       },
       {
-        path: '/pages/pengguna/:id', 
+        path: '/pages/pengguna/:id',
         name: 'AdminPenggunaEdit',
         component: AdminPenggunaEdit,
       },
       {
-        path: '/pages/hasilpsikologi', 
+        path: '/pages/hasilpsikologi',
         name: 'AdminHasilPsikologi',
         component: AdminHasilPsikologi,
       },
       {
-        path: '/pages/hasilpsikologi/deteksi/:id', 
+        path: '/pages/hasilpsikologi/deteksi/:id',
         name: 'AdminHasilPsikologiDeteksi',
         component: AdminHasilPsikologiDeteksi,
       },
       {
-        path: '/pages/hasilpsikologi/penanganan/:id', 
+        path: '/pages/hasilpsikologi/penanganan/:id',
         name: 'AdminHasilPsikologiPenanganan',
         component: AdminHasilPsikologiPenanganan,
       },
       {
-        path: '/pages/hasilpsikologi/sertifikat/:id', 
+        path: '/pages/hasilpsikologi/sertifikat/:id',
         name: 'AdminHasilPsikologiSertifikat',
         component: AdminHasilPsikologiSertifikat,
       },
       {
-        path: '/pages/hasilpsikologi/terapis/:id', 
+        path: '/pages/hasilpsikologi/terapis/:id',
         name: 'AdminHasilPsikologiTerapis',
         component: AdminHasilPsikologiTerapis,
       },
       {
-        path: '/pages/nilaipsikologi', 
+        path: '/pages/nilaipsikologi',
         name: 'AdminNilaiPsikologi',
         component: AdminNilaiPsikologi,
       },
       {
-        path: '/pages/analisaminatbakat', 
+        path: '/pages/analisaminatbakat',
         name: 'AdminAnalisaMinatBakat',
         component: AdminAnalisaMinatBakat,
       },
       {
-        path: '/pages/analisanpenjurusan', 
+        path: '/pages/analisanpenjurusan',
         name: 'AdminAnalisaPenjurusan',
         component: AdminAnalisaPenjurusan,
       },
       {
-        path: '/pages/catatan/kasus', 
+        path: '/pages/catatan/kasus',
         name: 'AdminCatatanKasus',
         component: AdminCatatanKasus,
       },
       {
-        path: '/pages/catatan/kasus/:id', 
+        path: '/pages/catatan/kasus/:id',
         name: 'AdminCatatanKasusPersiswa',
         component: AdminCatatanKasusPersiswa,
       },
       {
-        path: '/pages/catatan/pengembangandiri', 
+        path: '/pages/catatan/pengembangandiri',
         name: 'AdminCatatanPengembangandiri',
         component: AdminCatatanPengembangandiri,
       },
       {
-        path: '/pages/catatan/pengembangandiri/:id', 
+        path: '/pages/catatan/pengembangandiri/:id',
         name: 'AdminCatatanPengembangandiriPersiswa',
         component: AdminCatatanPengembangandiriPersiswa,
       },
       {
-        path: '/pages/catatan/prestasi', 
+        path: '/pages/catatan/prestasi',
         name: 'AdminCatatanPrestasi',
         component: AdminCatatanPrestasi,
       },
       {
-        path: '/pages/catatan/prestasi/:id', 
+        path: '/pages/catatan/prestasi/:id',
         name: 'AdminCatatanPrestasiPersiswa',
         component: AdminCatatanPrestasiPersiswa,
       },

@@ -189,6 +189,176 @@ const kecerdasanList = ref([
       </div>
     </div>
 
+    <div class="pt-4 px-10 md:flex justify-between">
+      <div>
+        <span
+          class="text-xl sm:text-xl leading-none font-bold text-gray-700 shadow-sm"
+          >IV. IQ (KM) 8 Kecerdasan {{ siswa.sertifikat.iq_persen }} %
+          Keterangan : {{ siswa.sertifikat.iqh }}</span
+        >
+      </div>
+      <div class="md:py-0 py-4 space-x-2 space-y-2"></div>
+    </div>
+    <div class="md:py-2 px-4 lg:flex flex-wrap gap-4">
+      <div class="w-full lg:w-full">
+        <div class="bg-base-100 shadow rounded-lg px-4 py-4">
+          <div class="overflow-x-auto">
+            <table class="table table-compact w-full">
+              <tbody>
+                <!-- row 1 -->
+                <tr>
+                  <td class="whitespace-nowrap w-1/100">IV.</td>
+                  <td class="whitespace-nowrap w-1/100">
+                    IQ (KM) 8 Kecerdasan
+                  </td>
+                  <td class="whitespace-pre-wrap w-1/100">Rank Nilai</td>
+                  <td class="whitespace-pre-wrap w-1/100">
+                    Sangat Kurang Sekali
+                  </td>
+                  <td class="whitespace-pre-wrap w-1/100">Kurang Sekali</td>
+                  <td class="whitespace-pre-wrap w-1/100">Kurang</td>
+                  <td class="whitespace-pre-wrap w-1/100">Hampir Cukup</td>
+                  <td class="whitespace-pre-wrap w-1/100">Cukup</td>
+                  <td class="whitespace-pre-wrap w-1/100">Kurang Baik</td>
+                  <td class="whitespace-pre-wrap w-1/100">Baik</td>
+                  <td class="whitespace-pre-wrap w-1/100">Baik Sekali</td>
+                  <td class="whitespace-pre-wrap w-1/100">
+                    Sangat Baik Sekali
+                  </td>
+                </tr>
+                <tr v-for="(item, index) in temp">
+                  <td class="whitespace-nowrap w-1/100"></td>
+                  <td class="whitespace-nowrap w-1/100">
+                    {{ item.nama }}
+                  </td>
+                  <td class="whitespace-nowrap w-1/100">
+                    {{ index + 1 }}
+                  </td>
+                  <td
+                    class="whitespace-nowrap w-1/100"
+                    v-for="kList in kecerdasanList"
+                  >
+                    <span
+                      class="flex justify-center"
+                      v-if="kList.code == item.ket || kList.altCode == item.ket"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </span>
+                  </td>
+                  <!-- <td>{{ item.persen }}</td> -->
+                  <!-- <td>{{ item.ket }}</td> -->
+                </tr>
+
+                <tr>
+                  <td class="whitespace-nowrap w-1/100">V.</td>
+                  <td class="whitespace-nowrap w-1/100">Pengetahuan Umum</td>
+                  <td class="whitespace-nowrap w-1/100"></td>
+                  <td
+                    class="whitespace-nowrap w-1/100"
+                    v-for="item in kecerdasanList"
+                  >
+                    <span
+                      class="flex justify-center"
+                      v-if="
+                        item.code == siswa.sertifikat.km_p1_keterangan ||
+                        item.altCode == siswa.sertifikat.km_p1_keterangan
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="whitespace-nowrap w-1/100">VI.</td>
+                  <td class="whitespace-nowrap w-1/100">Kreativitas</td>
+                  <td class="whitespace-nowrap w-1/100"></td>
+                  <td
+                    class="whitespace-nowrap w-1/100"
+                    v-for="item in kecerdasanList"
+                  >
+                    <span
+                      class="flex justify-center"
+                      v-if="
+                        item.code == siswa.sertifikat.km_kr_keterangan ||
+                        item.altCode == siswa.sertifikat.km_kr_keterangan
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="whitespace-nowrap w-1/100">VII.</td>
+                  <td class="whitespace-nowrap w-1/100">Kemampuan Mengingat</td>
+                  <td class="whitespace-nowrap w-1/100"></td>
+                  <td
+                    class="whitespace-nowrap w-1/100"
+                    v-for="item in kecerdasanList"
+                  >
+                    <span
+                      class="flex justify-center"
+                      v-if="
+                        item.code == siswa.sertifikat.km_p9_keterangan ||
+                        item.altCode == siswa.sertifikat.km_p9_keterangan
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </span>
+                  </td>
+                </tr>
+
+                <!-- row 2 -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="md:py-2 px-4 lg:flex flex-wrap">
       <div class="w-full lg:w-3/6">
         <div class="bg-base-100 shadow rounded-lg px-4 py-4">
@@ -198,7 +368,7 @@ const kecerdasanList = ref([
             >
               <tbody>
                 <tr>
-                  <th class="whitespace-nowrap w-1/100">IV.</th>
+                  <th class="whitespace-nowrap w-1/100">VIII.</th>
                   <th class="whitespace-nowrap w-1/12">ASPEK KEPRIBADIAN</th>
                   <th class="whitespace-nowrap w-1/100">%</th>
                   <th class="whitespace-nowrap w-1/100">Keterangan</th>
@@ -356,7 +526,7 @@ const kecerdasanList = ref([
       <div>
         <span
           class="text-2xl sm:text-xl leading-none font-bold text-gray-600 shadow-sm"
-          >V. KESIMPULAN DAN SARAN</span
+          >XI. KESIMPULAN DAN SARAN</span
         >
       </div>
       <div class="md:py-0 py-4 space-x-2 space-y-2"></div>
