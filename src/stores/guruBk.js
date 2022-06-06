@@ -3,8 +3,14 @@ export const useStoreGuruBk= defineStore({
     id: 'storeGuruBk',
     state: ()=>({
         identitas: [],
-        sekolah: [],
-        paket: [],
+        sekolah: {
+            status:'NonAktif',
+        },
+        paket: {
+            penanganandeteksi:true,
+            terapiskarakterpositif:false,
+
+    },
         stats: [],
     }),
     getters:{

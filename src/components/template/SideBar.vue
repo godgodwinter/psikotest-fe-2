@@ -28,25 +28,6 @@ if (getIsLogin.value == false) {
 const pagesActiveClass = ref(
   "border border-primary rounded-lg bg-primary text-primary-content"
 );
-
-const getData = async () => {
-  try {
-    const response = await Api.post(`gurubk/auth/me`);
-    storeGuruBk.setIdentitas(response.identitas);
-    storeGuruBk.setSekolah(response.sekolah);
-    storeGuruBk.setPaket(response.paket);
-    storeGuruBk.setStats(response.stats);
-    // data.value = response.data;
-    // data.value.map((item, index) => {
-    // arr.value.push(item.penjelasan);
-    // });
-
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
-};
-getData();
 </script>
 <template>
   <aside
