@@ -19,6 +19,10 @@ import AdminWaliKelas from '../views/admin/walikelas/Index.vue'
 import AdminWaliKelasEdit from '../views/admin/walikelas/Edit.vue'
 import AdminPengguna from '../views/admin/pengguna/Index.vue'
 import AdminPenggunaEdit from '../views/admin/pengguna/Edit.vue'
+// hasilpsikologi
+import AdminHasilPsikologi from '../views/admin/hasilpsikologi/Index.vue'
+import AdminHasilPsikologiDeteksi from '../views/admin/hasilpsikologi/Deteksi.vue'
+import AdminHasilPsikologiSertifikat from '../views/admin/hasilpsikologi/Sertifikat.vue'
 
 // testing
 // import TestingCetak1 from '../views/testing/TestingCetak1.vue'
@@ -110,6 +114,21 @@ const routes = [
         path: '/pages/pengguna/:id', 
         name: 'AdminPenggunaEdit',
         component: AdminPenggunaEdit,
+      },
+      {
+        path: '/pages/hasilpsikologi', 
+        name: 'AdminHasilPsikologi',
+        component: AdminHasilPsikologi,
+      },
+      {
+        path: '/pages/hasilpsikologi/deteksi/:id', 
+        name: 'AdminHasilPsikologiDeteksi',
+        component: AdminHasilPsikologiDeteksi,
+      },
+      {
+        path: '/pages/hasilpsikologi/sertifikat/:id', 
+        name: 'AdminHasilPsikologiSertifikat',
+        component: AdminHasilPsikologiSertifikat,
       },
     ]
   },

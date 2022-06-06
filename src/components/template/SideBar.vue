@@ -243,7 +243,7 @@ getData();
               :class="[pagesActive == 'hasilpsikologi' ? pagesActiveClass : '']"
             >
               <router-link
-                :to="{ name: 'AdminDashboard' }"
+                :to="{ name: 'AdminHasilPsikologi' }"
                 class="text-base-content font-normal rounded-lg flex items-center p-2 group hover:link"
               >
                 <svg
