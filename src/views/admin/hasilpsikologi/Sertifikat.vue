@@ -1,6 +1,6 @@
 <script setup>
 import Api from "@/axios/axios";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import BreadCrumb from "@/components/atoms/BreadCrumb.vue";
 import BreadCrumbSpace from "@/components/atoms/BreadCrumbSpace.vue";
 import ButtonEdit from "@/components/atoms/ButtonEdit.vue";
@@ -9,7 +9,7 @@ import { useStoreAdminBar } from "@/stores/adminBar";
 import { useRouter, useRoute } from "vue-router";
 import Toast from "@/components/lib/Toast.js";
 const storeAdminBar = useStoreAdminBar();
-storeAdminBar.setPagesActive("siswa");
+storeAdminBar.setPagesActive("hasilpsikologi");
 
 const router = useRouter();
 const route = useRoute();

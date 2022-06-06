@@ -266,7 +266,7 @@ getData();
               :class="[pagesActive == 'nilaipsikologi' ? pagesActiveClass : '']"
             >
               <router-link
-                :to="{ name: 'AdminDashboard' }"
+                :to="{ name: 'AdminNilaiPsikologi' }"
                 class="text-base-content font-normal rounded-lg flex items-center p-2 group hover:link"
               >
                 <svg
@@ -289,7 +289,7 @@ getData();
               :class="[pagesActive == 'minatbakat' ? pagesActiveClass : '']"
             >
               <router-link
-                :to="{ name: 'AdminDashboard' }"
+                :to="{ name: 'AdminAnalisaMinatBakat' }"
                 class="text-base-content font-normal rounded-lg flex items-center p-2 group hover:link"
               >
                 <svg
@@ -312,7 +312,7 @@ getData();
               :class="[pagesActive == 'penjurusan' ? pagesActiveClass : '']"
             >
               <router-link
-                :to="{ name: 'AdminDashboard' }"
+                :to="{ name: 'AdminAnalisaPenjurusan' }"
                 class="text-base-content font-normal rounded-lg flex items-center p-2 group hover:link"
               >
                 <svg

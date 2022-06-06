@@ -265,8 +265,8 @@ const doPilihKelas = () => {
                 <div v-if="props.row.deteksi > 0" class="flex justify-center">
                   <router-link
                     :to="{
-                      name: 'AdminHasilPsikologi',
-                      params: { id, id2: props.row.id },
+                      name: 'AdminHasilPsikologiPenanganan',
+                      params: { id: props.row.id },
                     }"
                   >
                     <button
@@ -371,8 +371,8 @@ const doPilihKelas = () => {
                 >
                   <router-link
                     :to="{
-                      name: 'AdminHasilPsikologi',
-                      params: { id, id2: props.row.id },
+                      name: 'AdminHasilPsikologiTerapis',
+                      params: { id: props.row.id },
                     }"
                   >
                     <button

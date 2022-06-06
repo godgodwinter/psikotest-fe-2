@@ -22,7 +22,13 @@ import AdminPenggunaEdit from '../views/admin/pengguna/Edit.vue'
 // hasilpsikologi
 import AdminHasilPsikologi from '../views/admin/hasilpsikologi/Index.vue'
 import AdminHasilPsikologiDeteksi from '../views/admin/hasilpsikologi/Deteksi.vue'
+import AdminHasilPsikologiPenanganan from '../views/admin/hasilpsikologi/Penanganan.vue'
 import AdminHasilPsikologiSertifikat from '../views/admin/hasilpsikologi/Sertifikat.vue'
+import AdminHasilPsikologiTerapis from '../views/admin/hasilpsikologi/Terapis.vue'
+// nilaipsikologi
+import AdminNilaiPsikologi from '../views/admin/nilaipsikologi/Index.vue'
+import AdminAnalisaMinatBakat from '../views/admin/analisaminatbakat/Index.vue'
+import AdminAnalisaPenjurusan from '../views/admin/analisanpenjurusan/Index.vue'
 
 // testing
 // import TestingCetak1 from '../views/testing/TestingCetak1.vue'
@@ -126,9 +132,34 @@ const routes = [
         component: AdminHasilPsikologiDeteksi,
       },
       {
+        path: '/pages/hasilpsikologi/penanganan/:id', 
+        name: 'AdminHasilPsikologiPenanganan',
+        component: AdminHasilPsikologiPenanganan,
+      },
+      {
         path: '/pages/hasilpsikologi/sertifikat/:id', 
         name: 'AdminHasilPsikologiSertifikat',
         component: AdminHasilPsikologiSertifikat,
+      },
+      {
+        path: '/pages/hasilpsikologi/terapis/:id', 
+        name: 'AdminHasilPsikologiTerapis',
+        component: AdminHasilPsikologiTerapis,
+      },
+      {
+        path: '/pages/nilaipsikologi', 
+        name: 'AdminNilaiPsikologi',
+        component: AdminNilaiPsikologi,
+      },
+      {
+        path: '/pages/analisaminatbakat', 
+        name: 'AdminAnalisaMinatBakat',
+        component: AdminAnalisaMinatBakat,
+      },
+      {
+        path: '/pages/analisanpenjurusan', 
+        name: 'AdminAnalisaPenjurusan',
+        component: AdminAnalisaPenjurusan,
       },
     ]
   },
