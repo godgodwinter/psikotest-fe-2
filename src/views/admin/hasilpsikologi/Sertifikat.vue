@@ -8,6 +8,16 @@ import { Field, Form } from "vee-validate";
 import { useStoreAdminBar } from "@/stores/adminBar";
 import { useRouter, useRoute } from "vue-router";
 import Toast from "@/components/lib/Toast.js";
+import Fungsi from "@/components/lib/Psikotest.js";
+
+import { useStoreGuruBk } from "@/stores/guruBk";
+const storeGuruBk = useStoreGuruBk();
+const paket = computed(() => storeGuruBk.getPaket);
+storeGuruBk.$subscribe((mutation, state) => {
+  // console.log(mutation, state);
+  // console.log(paket.value);
+});
+
 const storeAdminBar = useStoreAdminBar();
 storeAdminBar.setPagesActive("hasilpsikologi");
 
@@ -22,7 +32,7 @@ const siswa = ref();
 const aspekKepribadianRank = ref([]);
 const temp = ref([{ nama: "" }]);
 const kecerdasan = ref([]);
-
+const kelas = ref(null);
 const getDataId = async () => {
   try {
     const response = await Api.get(
@@ -30,6 +40,7 @@ const getDataId = async () => {
     );
     dataAsli.value = response.data;
     dataDetail.value = response.data;
+    kelas.value = Fungsi.getKelas(response.data.kelas_nama);
     data.value = response.data.sertifikat;
     siswa.value = response.data;
 
@@ -1091,34 +1102,44 @@ function romanize(num) {
             dikendalikan supaya tidak menghambat prestasi subyek.
           </p>
           <!-- kesimpulan -->
-          <p class="indent-8">
-            Dalam kelanjutan studi
-            <b>{{ getKesimpulanIq(siswa.sertifikat.iq) }} </b> tapi perlu
-            ditunjang oleh EQ dan SQ
-            <b> {{ getKesimpulanEqSq(siswa.sertifikat.iq) }}</b> dari potensi
-            kecerdasan yang dimiliki subyek dan menunjukkan adanya upaya
-            keseimbangan antara potensi kecerdasan koqnitif - usaha / semangat
-            didukung oleh emosi positif - kematangan kemampuan sosialnya.
-          </p>
-          <!-- jika kelas 9  -->
-          <p class="indent-8">
-            Kelanjutan studi disarankan masuk Sekolah
-            <b> {{ siswa.sertifikat.saran_fakultas_1 }} </b> dengan Jurusan
-            <b> {{ siswa.sertifikat.saran_fakultas_1_prodi }}</b
-            >, Sekolah <b> {{ siswa.sertifikat.saran_fakultas_2 }}</b> dengan
-            Jurusan <b> {{ siswa.sertifikat.saran_fakultas_2_prodi }}</b
-            >.
-          </p>
-          <!-- jika  kelas 12 -->
+          <div v-if="paket.ist == 'Aktif'">
+            <p class="indent-8">
+              Dalam kelanjutan studi
+              <b>{{ getKesimpulanIq(siswa.sertifikat.iq) }} </b> tapi perlu
+              ditunjang oleh EQ dan SQ
+              <b> {{ getKesimpulanEqSq(siswa.sertifikat.iq) }}</b> dari potensi
+              kecerdasan yang dimiliki subyek dan menunjukkan adanya upaya
+              keseimbangan antara potensi kecerdasan koqnitif - usaha / semangat
+              didukung oleh emosi positif - kematangan kemampuan sosialnya.
+            </p>
+            <!-- jika kelas 9  -->
+            <p
+              class="indent-8"
+              v-if="kelas == 'IX' || kelas == 'ix' || kelas == '9'"
+            >
+              Kelanjutan studi disarankan masuk Sekolah
+              <b> {{ siswa.sertifikat.saran_fakultas_1 }} </b> dengan Jurusan
+              <b> {{ siswa.sertifikat.saran_fakultas_1_prodi }}</b
+              >, Sekolah <b> {{ siswa.sertifikat.saran_fakultas_2 }}</b> dengan
+              Jurusan <b> {{ siswa.sertifikat.saran_fakultas_2_prodi }}</b
+              >.
+            </p>
+            <!-- jika  kelas 12 -->
 
-          <p class="indent-8">
-            Kelanjutan studi disarankan masuk Fakultas
-            <b> {{ siswa.sertifikat.saran_fakultas_1 }} </b> dengan Prodi
-            <b> {{ siswa.sertifikat.saran_fakultas_1_prodi }}</b
-            >, Fakultas <b> {{ siswa.sertifikat.saran_fakultas_2 }} </b> dengan
-            Prodi
-            <b> {{ siswa.sertifikat.saran_fakultas_2_prodi }}</b>
-          </p>
+            <p
+              class="indent-8"
+              v-else-if="
+                kelas == 'XI' || kelas == 'xi' || kelas == '11' || kelas == '12'
+              "
+            >
+              Kelanjutan studi disarankan masuk Fakultas
+              <b> {{ siswa.sertifikat.saran_fakultas_1 }} </b> dengan Prodi
+              <b> {{ siswa.sertifikat.saran_fakultas_1_prodi }}</b
+              >, Fakultas
+              <b> {{ siswa.sertifikat.saran_fakultas_2 }} </b> dengan Prodi
+              <b> {{ siswa.sertifikat.saran_fakultas_2_prodi }}</b>
+            </p>
+          </div>
         </div>
       </div>
       <div class="md:py-0 py-4 space-x-2 space-y-2"></div>
