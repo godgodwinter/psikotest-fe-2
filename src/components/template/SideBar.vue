@@ -333,7 +333,7 @@ getData();
               :class="[pagesActive == 'kasus' ? pagesActiveClass : '']"
             >
               <router-link
-                :to="{ name: 'AdminDashboard' }"
+                :to="{ name: 'AdminCatatanKasus' }"
                 class="text-base-content font-normal rounded-lg flex items-center p-2 group hover:link"
               >
                 <svg
@@ -360,7 +360,7 @@ getData();
               ]"
             >
               <router-link
-                :to="{ name: 'AdminDashboard' }"
+                :to="{ name: 'AdminCatatanPengembangandiri' }"
                 class="text-base-content font-normal rounded-lg flex items-center p-2 group hover:link"
               >
                 <svg
@@ -384,7 +384,7 @@ getData();
               :class="[pagesActive == 'prestasi' ? pagesActiveClass : '']"
             >
               <router-link
-                :to="{ name: 'AdminDashboard' }"
+                :to="{ name: 'AdminCatatanPrestasi' }"
                 class="text-base-content font-normal rounded-lg flex items-center p-2 group hover:link"
               >
                 <svg

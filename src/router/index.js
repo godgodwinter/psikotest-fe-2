@@ -29,6 +29,13 @@ import AdminHasilPsikologiTerapis from '../views/admin/hasilpsikologi/Terapis.vu
 import AdminNilaiPsikologi from '../views/admin/nilaipsikologi/Index.vue'
 import AdminAnalisaMinatBakat from '../views/admin/analisaminatbakat/Index.vue'
 import AdminAnalisaPenjurusan from '../views/admin/analisanpenjurusan/Index.vue'
+// catatan
+import AdminCatatanKasus from '../views/admin/catatankasus/Index.vue'
+import AdminCatatanKasusPersiswa from '../views/admin/catatankasus/Persiswa.vue'
+import AdminCatatanPengembangandiri from '../views/admin/catatanpengembangandiri/Index.vue'
+import AdminCatatanPengembangandiriPersiswa from '../views/admin/catatanpengembangandiri/Persiswa.vue'
+import AdminCatatanPrestasi from '../views/admin/catatanprestasi/Index.vue'
+import AdminCatatanPrestasiPersiswa from '../views/admin/catatanprestasi/Persiswa.vue'
 
 // testing
 // import TestingCetak1 from '../views/testing/TestingCetak1.vue'
@@ -160,6 +167,36 @@ const routes = [
         path: '/pages/analisanpenjurusan', 
         name: 'AdminAnalisaPenjurusan',
         component: AdminAnalisaPenjurusan,
+      },
+      {
+        path: '/pages/catatan/kasus', 
+        name: 'AdminCatatanKasus',
+        component: AdminCatatanKasus,
+      },
+      {
+        path: '/pages/catatan/kasus/:id', 
+        name: 'AdminCatatanKasusPersiswa',
+        component: AdminCatatanKasusPersiswa,
+      },
+      {
+        path: '/pages/catatan/pengembangandiri', 
+        name: 'AdminCatatanPengembangandiri',
+        component: AdminCatatanPengembangandiri,
+      },
+      {
+        path: '/pages/catatan/pengembangandiri/:id', 
+        name: 'AdminCatatanPengembangandiriPersiswa',
+        component: AdminCatatanPengembangandiriPersiswa,
+      },
+      {
+        path: '/pages/catatan/prestasi', 
+        name: 'AdminCatatanPrestasi',
+        component: AdminCatatanPrestasi,
+      },
+      {
+        path: '/pages/catatan/prestasi/:id', 
+        name: 'AdminCatatanPrestasiPersiswa',
+        component: AdminCatatanPrestasiPersiswa,
       },
     ]
   },

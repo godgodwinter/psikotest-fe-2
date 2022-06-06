@@ -16,7 +16,7 @@ storeGuruBk.$subscribe((mutation, state) => {
 });
 
 const storeAdminBar = useStoreAdminBar();
-storeAdminBar.setPagesActive("penjurusan");
+storeAdminBar.setPagesActive("minatbakat");
 const router = useRouter();
 
 let pilihKelas = ref([
