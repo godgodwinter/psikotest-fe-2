@@ -678,7 +678,9 @@ function romanize(num) {
                   <td class="whitespace-nowrap w-1/100">
                     {{ siswa.sertifikat.eq_persen }}
                   </td>
-                  <td>/ {{ iqket(siswa.sertifikat.eq_persen) }}</td>
+                  <td>
+                    / {{ kepanjangan(siswa.sertifikat.eq_persen_keterangan) }}
+                  </td>
                 </tr>
                 <tr>
                   <td class="whitespace-nowrap w-1/100">III.</td>
@@ -689,7 +691,9 @@ function romanize(num) {
                   <td class="whitespace-nowrap w-1/100">
                     {{ siswa.sertifikat.scq_persen }}
                   </td>
-                  <td>/ {{ iqket(siswa.sertifikat.scq_persen) }}</td>
+                  <td>
+                    / {{ kepanjangan(siswa.sertifikat.scq_persen_keterangan) }}
+                  </td>
                 </tr>
 
                 <!-- row 2 -->
