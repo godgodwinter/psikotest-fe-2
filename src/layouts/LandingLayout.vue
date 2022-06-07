@@ -1,4 +1,12 @@
 <script setup>
+const BASE_URL = import.meta.env.VITE_API_URL;
+const VITE_API_URLFE_ADMIN = import.meta.env.VITE_API_URLFE_ADMIN;
+const VITE_API_URLFE_SEKOLAH = import.meta.env.VITE_API_URLFE_SEKOLAH;
+const VITE_API_URLFE_SISWA = import.meta.env.VITE_API_URLFE_SISWA;
+const VITE_API_URLFE_YAYASAN = import.meta.env.VITE_API_URLFE_YAYASAN;
+const VITE_API_URLFE_ORTU = import.meta.env.VITE_API_URLFE_ORTU;
+const VITE_API_URLFE_OWNER = import.meta.env.VITE_API_URLFE_OWNER;
+const VITE_API_URLFE = import.meta.env.VITE_API_URLFE;
 import { ref } from "vue";
 import { computed } from "vue";
 import { useCounterStore } from "@/stores/counter";
@@ -184,20 +192,21 @@ getData();
                   class="text-base-content font-normal text-sm hover:link"
                   >Sekolah</router-link
                 >
-                <router-link
-                  :to="{ name: 'LandingLogin' }"
+                <a
+                  :href="VITE_API_URLFE_YAYASAN"
                   class="text-base-content font-normal text-sm hover:link"
-                  >Yayasan</router-link
+                  >Yayasan</a
                 >
-                <router-link
+                <a
+                  :href="VITE_API_URLFE_SISWA"
+                  class="text-base-content font-normal text-sm hover:link"
+                  >Siswa</a
+                >
+                <a
+                  :href="VITE_API_URLFE_ORTU"
                   :to="{ name: 'LandingIndex' }"
                   class="text-base-content font-normal text-sm hover:link"
-                  >Siswa</router-link
-                >
-                <router-link
-                  :to="{ name: 'LandingIndex' }"
-                  class="text-base-content font-normal text-sm hover:link"
-                  >Wali Murid</router-link
+                  >Wali Murid</a
                 >
 
                 <!-- <a href="https://github.com/godgodwinter" target="blank" class=" text-base-content font-semibold text-sm hover:text-vue-600 hover:link">Github </a> -->

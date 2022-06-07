@@ -151,7 +151,7 @@ const onSubmit = () => {
       <div class="hero-content flex-col lg:flex-row-reverse">
         <div class="text-center lg:text-left">
           <h1 class="text-5xl font-bold">Menu Sekolah</h1>
-          <p class="py-6">Masuk sebagai Admin Sekolah.</p>
+          <p class="py-6">Masuk sebagai Akun Sekolah.</p>
         </div>
         <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <div class="card-body">

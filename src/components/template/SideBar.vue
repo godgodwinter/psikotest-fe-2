@@ -72,7 +72,7 @@ const pagesActiveClass = ref(
                 <p
                   class="text-base-content text-sm font-medium text-center link link-primary"
                 >
-                  User Sekolah
+                  Akun Sekolah
                 </p>
               </div>
             </li>
