@@ -40,6 +40,7 @@ const doLogin = async (username, password) => {
   }
 };
 const onSubmit = () => {
+  // console.log(email.value, password.value);
   doLogin(email.value, password.value);
 };
 </script>
