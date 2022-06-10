@@ -9,6 +9,10 @@ import ButtonTwo from "../../components/atoms/ButtonTwo.vue";
         class="hero-content flex-col justify-between lg:flex-row-reverse w-full"
       >
         <img
+          data-aos="slide-left"
+          data-aos-offset="200"
+          data-aos-easing="ease-in-sine"
+          data-aos-duration="600"
           src="@/assets/img/other/img-landing2.svg"
           class="max-w-sm rounded-lg shadow-sm"
         />
@@ -23,7 +27,12 @@ import ButtonTwo from "../../components/atoms/ButtonTwo.vue";
             <img src="@/assets/img/other/img-landing2.svg" />
           </div>
         </div> -->
-        <div>
+        <div
+          data-aos="slide-right"
+          data-aos-offset="200"
+          data-aos-easing="ease-in-sine"
+          data-aos-duration="600"
+        >
           <h1 class="text-5xl font-bold">Yayasan Pelita Multi Talenta</h1>
           <p class="py-6">
             Kantor Operasional Teratai No. 10 Sekretariat Letjen Sutoyo V Malang
@@ -50,8 +59,14 @@ import ButtonTwo from "../../components/atoms/ButtonTwo.vue";
         </p> -->
       </div>
       <div class="max-w-6xl mx-auto">
-        <div class="flex flex-wrap items-center -mx-3">
-          <div class="w-full lg:w-1/3 px-3 mb-8 lg:mb-0">
+        <div class="flex flex-wrap items-center -mx-3 space-y-4 justify-center">
+          <div
+            class="w-full lg:w-1/3 px-3 mb-8 lg:mb-0"
+            data-aos="zoom-in"
+            data-aos-offset="200"
+            data-aos-easing="ease-in-sine"
+            data-aos-duration="600"
+          >
             <div class="px-12 py-16 bg-base-300 rounded-3xl">
               <div class="pb-8 mb-14 border-b border-gray-400">
                 <div class="flex justify-between items-center px-3">
@@ -108,7 +123,13 @@ import ButtonTwo from "../../components/atoms/ButtonTwo.vue";
               </div>
             </div>
           </div>
-          <div class="w-full lg:w-1/3 px-3 mb-8 lg:mb-0">
+          <div
+            class="w-full lg:w-1/3 px-3 mb-8 lg:mb-0"
+            data-aos="zoom-out"
+            data-aos-offset="200"
+            data-aos-easing="ease-in-sine"
+            data-aos-duration="600"
+          >
             <div class="px-12 py-16 bg-base-300 rounded-3xl">
               <div class="pb-8 mb-14 border-b border-gray-400">
                 <div class="flex justify-between items-center px-3">
@@ -146,7 +167,13 @@ import ButtonTwo from "../../components/atoms/ButtonTwo.vue";
               </div>
             </div>
           </div>
-          <div class="w-full lg:w-1/3 px-3 mb-8 lg:mb-0">
+          <div
+            class="w-full lg:w-1/3 px-3 mb-8 lg:mb-0"
+            data-aos="zoom-in"
+            data-aos-offset="200"
+            data-aos-easing="ease-in-sine"
+            data-aos-duration="600"
+          >
             <div class="px-12 py-16 bg-blue-500 rounded-3xl">
               <div class="pb-8 mb-14 border-b border-blueGray-300">
                 <div class="flex justify-between items-center px-3">
@@ -253,7 +280,13 @@ import ButtonTwo from "../../components/atoms/ButtonTwo.vue";
             </div>
           </div>
 
-          <div class="w-full lg:w-1/3 px-3 mb-8 lg:mb-0">
+          <div
+            class="w-full lg:w-1/3 px-3 mb-8 lg:mb-0"
+            data-aos="zoom-in"
+            data-aos-offset="200"
+            data-aos-easing="ease-in-sine"
+            data-aos-duration="600"
+          >
             <div class="px-12 py-16 bg-base-300 rounded-3xl">
               <div class="pb-8 mb-14 border-b border-gray-400">
                 <div class="flex justify-between items-center px-3">

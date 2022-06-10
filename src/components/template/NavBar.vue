@@ -97,16 +97,18 @@ getData();
               />
             </svg>
           </button>
-          <a href="#" class="text-xl font-bold flex items-center lg:ml-2.5">
-            <img
-              src="../../assets/img/logo/tailwindcss-icon.svg"
-              class="h-6 mr-2"
-              alt="Windster Logo"
-            />
-            <span class="self-center whitespace-nowrap"
-              >PELITA MULTI TALENTA</span
-            >
-          </a>
+          <router-link :to="{ name: 'LandingIndex' }">
+            <span class="text-xl font-bold flex items-center lg:ml-2.5">
+              <img
+                src="../../assets/img/logo/tailwindcss-icon.svg"
+                class="h-6 mr-2"
+                alt="Windster Logo"
+              />
+              <span class="self-center whitespace-nowrap"
+                >PELITA MULTI TALENTA</span
+              >
+            </span>
+          </router-link>
         </div>
         <div class="flex items-center">
           <div class="hidden lg:flex items-center">

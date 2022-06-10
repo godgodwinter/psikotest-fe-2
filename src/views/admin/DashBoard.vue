@@ -8,6 +8,11 @@ import { useStoreGuruBk } from "@/stores/guruBk";
 
 import moment from "moment/min/moment-with-locales";
 import localization from "moment/locale/id";
+import Toast from "@/components/lib/Toast.js";
+import { useRouter, useRoute } from "vue-router";
+import Api from "@/axios/axios";
+const router = useRouter();
+const route = useRoute();
 
 moment.updateLocale("id", localization);
 const storeGuruBk = useStoreGuruBk();
@@ -39,23 +44,37 @@ const validateData = (value) => {
   }
   return true;
 };
-const onSubmit = () => {
-  // const res = doStoreData();
-};
 // vue pinia watch
-storeGuruBk.$subscribe((mutation, state) => {
-  dataDetail.value = {
-    nama: getSekolah.value.nama,
-    alamat: getSekolah.value.alamat,
-    status: getSekolah.value.status ? getSekolah.value.status : "Aktif",
-    kepsek_nama: getSekolah.value.kepsek_nama,
-    tahunajaran_nama: getSekolah.value.tahunajaran_nama,
-    semester_nama: getSekolah.value.semester_nama,
-    kecamatan: getSekolah.value.kecamatan,
-    kabupaten: getSekolah.value.kabupaten,
-    provinsi: getSekolah.value.provinsi,
+storeGuruBk.$subscribe((mutation, state) => {});
+
+const onSubmit = () => {
+  const res = doStoreData();
+};
+
+const doStoreData = async (d) => {
+  let dataStore = {
+    nama: dataDetail.value.nama,
+    alamat: dataDetail.value.alamat,
+    status: dataDetail.value.status ? dataDetail.value.status : "Aktif",
+    kepsek_nama: dataDetail.value.kepsek_nama,
+    tahunajaran_nama: dataDetail.value.tahunajaran_nama,
+    semester_nama: dataDetail.value.semester_nama,
+    kecamatan: dataDetail.value.kecamatan,
+    kabupaten: dataDetail.value.kabupaten,
+    provinsi: dataDetail.value.provinsi,
   };
-});
+  try {
+    const response = await Api.post(`gurubk/myprofile/update`, dataStore);
+    Toast.success("Success", "Data Berhasil update!");
+    router.go();
+    // resetForm();
+
+    return response.data;
+  } catch (error) {
+    Toast.danger("Warning", "Data gagal ditambahkan!");
+    console.error(error);
+  }
+};
 </script>
 <template>
   <div class="pt-4 px-10 md:flex justify-between">
