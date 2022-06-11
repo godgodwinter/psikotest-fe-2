@@ -46,7 +46,7 @@ import ButtonTwo from "../../components/atoms/ButtonTwo.vue";
     </div>
   </div>
 
-  <section class="pt-20 pb-24 2xl:py-40 bg-base-content" id="paket">
+  <!-- <section class="pt-20 pb-24 2xl:py-40 bg-base-content" id="paket">
     <div class="container mx-auto px-4">
       <div class="mb-16 md:mb-24 text-center">
         <h2
@@ -54,9 +54,6 @@ import ButtonTwo from "../../components/atoms/ButtonTwo.vue";
         >
           Fitur dan Paket
         </h2>
-        <!-- <p class="text-lg text-gray-content">
-          Beberapa pilihan Paket dan fitur yang tersedia.
-        </p> -->
       </div>
       <div class="max-w-6xl mx-auto">
         <div class="flex flex-wrap items-center -mx-3 space-y-4 justify-center">
@@ -67,7 +64,9 @@ import ButtonTwo from "../../components/atoms/ButtonTwo.vue";
             data-aos-easing="ease-in-sine"
             data-aos-duration="600"
           >
-            <div class="px-12 py-16 bg-base-300 rounded-3xl">
+            <div
+              class="px-12 py-16 bg-base-300 hover:bg-primary transition transition-colors hover:scale-110 transition-transform rounded-3xl"
+            >
               <div class="pb-8 mb-14 border-b border-gray-400">
                 <div class="flex justify-between items-center px-3">
                   <h3 class="text-4xl text-base-content font-bold font-heading">
@@ -327,5 +326,5 @@ import ButtonTwo from "../../components/atoms/ButtonTwo.vue";
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 </template>
