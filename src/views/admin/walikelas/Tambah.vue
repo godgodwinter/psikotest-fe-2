@@ -9,7 +9,7 @@ import { useStoreAdminBar } from "@/stores/adminBar";
 import { useRouter, useRoute } from "vue-router";
 import Toast from "@/components/lib/Toast.js";
 const storeAdminBar = useStoreAdminBar();
-storeAdminBar.setPagesActive("pengguna");
+storeAdminBar.setPagesActive("walikelas");
 
 let pilihWaliKelas = ref([]);
 
@@ -26,22 +26,21 @@ const inputCariKelas = ref({
   id: "Semua Kelas",
 });
 
-const getDataId = async () => {
-  try {
-    const response = await Api.get(`gurubk/pengguna/${route.params.id}`);
-    dataAsli.value = response.data;
-    dataDetail.value = {
-      nama: response.data.nama,
-      username: response.data.username,
-      password: "",
-    };
+// const getDataId = async () => {
+//   try {
+//     const response = await Api.get(`gurubk/walikelas/${route.params.id}`);
+//     dataAsli.value = response.data;
+//     dataDetail.value = {
+//       nama: response.data.nama,
+//       nomerinduk: response.data.nomerinduk,
+//     };
 
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
-};
-getDataId();
+//     return response.data;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
+// getDataId();
 
 const id = route.params.id;
 
@@ -60,14 +59,13 @@ const onSubmit = () => {
 const doStoreData = async (d) => {
   let dataStore = {
     nama: dataDetail.value.nama,
-    username: dataDetail.value.username,
-    password: dataDetail.value.password,
+    nomerinduk: dataDetail.value.nomerinduk,
   };
   try {
-    const response = await Api.put(`gurubk/pengguna/${id}`, dataStore);
+    const response = await Api.post(`gurubk/walikelas`, dataStore);
     Toast.success("Success", "Data Berhasil update!");
     // resetForm();
-    router.push({ name: "AdminPengguna" });
+    router.push({ name: "AdminWaliKelas" });
 
     return response.data;
   } catch (error) {
@@ -87,7 +85,7 @@ const doStoreData = async (d) => {
     </div>
     <div class="md:py-0 py-4">
       <BreadCrumb>
-        <template v-slot:content> Pengguna <BreadCrumbSpace /> Edit </template>
+        <template v-slot:content> WaliKelas <BreadCrumbSpace /> Edit </template>
       </BreadCrumb>
     </div>
   </div>
@@ -95,7 +93,7 @@ const doStoreData = async (d) => {
   <div class="pt-4 px-10 md:flex justify-between">
     <div></div>
     <div class="md:py-0 py-4 space-x-2 space-y-2">
-      <router-link :to="{ name: 'AdminPengguna' }">
+      <router-link :to="{ name: 'AdminWaliKelas' }">
         <button
           class="btn hover:shadow-lg shadow text-white hover:text-gray-100 gap-2"
         >
@@ -152,40 +150,19 @@ const doStoreData = async (d) => {
                         <label
                           for="name"
                           class="text-sm font-medium text-gray-900 block mb-2"
-                          >Username</label
+                          >Nomer Induk</label
                         >
                         <Field
-                          v-model="dataDetail.username"
+                          v-model="dataDetail.nomerinduk"
                           :rules="validateData"
                           type="text"
-                          name="username"
-                          ref="username"
-                          class="input input-bordered md:w-full max-w-2xl"
-                          required
-                          readonly
-                        />
-                        <div class="text-xs text-red-600 mt-1">
-                          {{ errors.username }}
-                        </div>
-                      </div>
-
-                      <div>
-                        <label
-                          for="name"
-                          class="text-sm font-medium text-gray-900 block mb-2"
-                          >Password</label
-                        >
-                        <Field
-                          v-model="dataDetail.password"
-                          :rules="validateData"
-                          type="password"
-                          name="password"
-                          ref="password"
+                          name="nomerinduk"
+                          ref="nomerinduk"
                           class="input input-bordered md:w-full max-w-2xl"
                           required
                         />
                         <div class="text-xs text-red-600 mt-1">
-                          {{ errors.password }}
+                          {{ errors.nomerinduk }}
                         </div>
                       </div>
                     </div>

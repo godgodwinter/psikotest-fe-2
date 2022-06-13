@@ -105,6 +105,11 @@ const routes = [
         component: AdminKelas,
       },
       {
+        path: '/pages/datakelas/tambah',
+        name: 'AdminKelasTambah',
+        component: () => import("@/views/admin/kelas/Tambah.vue"),
+      },
+      {
         path: '/pages/kelas/:id',
         name: 'AdminKelasEdit',
         component: AdminKelasEdit,
@@ -113,6 +118,11 @@ const routes = [
         path: '/pages/walikelas',
         name: 'AdminWaliKelas',
         component: AdminWaliKelas,
+      },
+      {
+        path: '/pages/datawalikelas/tambah',
+        name: 'AdminWaliKelasTambah',
+        component: () => import("@/views/admin/walikelas/Tambah.vue"),
       },
       {
         path: '/pages/walikelas/:id',

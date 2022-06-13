@@ -194,7 +194,7 @@ const pagesActiveClass = ref(
                 <span class="ml-3">Wali Kelas </span>
               </router-link>
             </li>
-            <li
+            <!-- <li
               class="lg:w-full py-0"
               :class="[pagesActive == 'pengguna' ? pagesActiveClass : '']"
             >
@@ -218,7 +218,7 @@ const pagesActiveClass = ref(
                 </svg>
                 <span class="ml-3">Pengguna </span>
               </router-link>
-            </li>
+            </li> -->
             <li
               class="lg:w-full py-0"
               :class="[pagesActive == 'hasilpsikologi' ? pagesActiveClass : '']"

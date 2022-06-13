@@ -9,7 +9,7 @@ import { useStoreAdminBar } from "@/stores/adminBar";
 import { useRouter, useRoute } from "vue-router";
 import Toast from "@/components/lib/Toast.js";
 const storeAdminBar = useStoreAdminBar();
-storeAdminBar.setPagesActive("pengguna");
+storeAdminBar.setPagesActive("kelas");
 
 let pilihWaliKelas = ref([]);
 
@@ -26,22 +26,24 @@ const inputCariKelas = ref({
   id: "Semua Kelas",
 });
 
-const getDataId = async () => {
-  try {
-    const response = await Api.get(`gurubk/pengguna/${route.params.id}`);
-    dataAsli.value = response.data;
-    dataDetail.value = {
-      nama: response.data.nama,
-      username: response.data.username,
-      password: "",
-    };
+// const getDataId = async () => {
+//   try {
+//     const response = await Api.get(`gurubk/kelas/${route.params.id}`);
+//     dataAsli.value = response.data;
+//     dataDetail.value = {
+//       nama: response.data.nama,
+//       walikelas_id: {
+//         label: `${response.data.walikelas_nama}`,
+//         id: response.data.walikelas_id,
+//       },
+//     };
 
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
-};
-getDataId();
+//     return response.data;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
+// getDataId();
 
 const id = route.params.id;
 
@@ -60,14 +62,13 @@ const onSubmit = () => {
 const doStoreData = async (d) => {
   let dataStore = {
     nama: dataDetail.value.nama,
-    username: dataDetail.value.username,
-    password: dataDetail.value.password,
+    walikelas_id: dataDetail.value.walikelas_id.id,
   };
   try {
-    const response = await Api.put(`gurubk/pengguna/${id}`, dataStore);
+    const response = await Api.post(`gurubk/kelas`, dataStore);
     Toast.success("Success", "Data Berhasil update!");
     // resetForm();
-    router.push({ name: "AdminPengguna" });
+    router.push({ name: "AdminKelas" });
 
     return response.data;
   } catch (error) {
@@ -75,6 +76,22 @@ const doStoreData = async (d) => {
     console.error(error);
   }
 };
+
+const getDataWaliKelas = async () => {
+  try {
+    const response = await Api.get(`gurubk/walikelas`);
+    getDataWaliKelas.value = response.data;
+    getDataWaliKelas.value.forEach((item) => {
+      pilihWaliKelas.value.push({
+        label: `${item.nama} (${item.jml_kelas} Kelas)`,
+        id: item.id,
+      });
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+getDataWaliKelas();
 </script>
 <template>
   <div class="pt-4 px-10 md:flex justify-between">
@@ -87,7 +104,7 @@ const doStoreData = async (d) => {
     </div>
     <div class="md:py-0 py-4">
       <BreadCrumb>
-        <template v-slot:content> Pengguna <BreadCrumbSpace /> Edit </template>
+        <template v-slot:content> Kelas <BreadCrumbSpace /> Tambah </template>
       </BreadCrumb>
     </div>
   </div>
@@ -95,7 +112,7 @@ const doStoreData = async (d) => {
   <div class="pt-4 px-10 md:flex justify-between">
     <div></div>
     <div class="md:py-0 py-4 space-x-2 space-y-2">
-      <router-link :to="{ name: 'AdminPengguna' }">
+      <router-link :to="{ name: 'AdminKelas' }">
         <button
           class="btn hover:shadow-lg shadow text-white hover:text-gray-100 gap-2"
         >
@@ -148,44 +165,21 @@ const doStoreData = async (d) => {
                           {{ errors.nama }}
                         </div>
                       </div>
-                      <div>
-                        <label
-                          for="name"
-                          class="text-sm font-medium text-gray-900 block mb-2"
-                          >Username</label
-                        >
-                        <Field
-                          v-model="dataDetail.username"
-                          :rules="validateData"
-                          type="text"
-                          name="username"
-                          ref="username"
-                          class="input input-bordered md:w-full max-w-2xl"
-                          required
-                          readonly
-                        />
-                        <div class="text-xs text-red-600 mt-1">
-                          {{ errors.username }}
-                        </div>
-                      </div>
 
                       <div>
                         <label
                           for="name"
                           class="text-sm font-medium text-gray-900 block mb-2"
-                          >Password</label
+                          >Walikelas</label
                         >
-                        <Field
-                          v-model="dataDetail.password"
-                          :rules="validateData"
-                          type="password"
-                          name="password"
-                          ref="password"
-                          class="input input-bordered md:w-full max-w-2xl"
-                          required
-                        />
+                        <v-select
+                          class="py-2 px-3 w-72 mx-auto md:mx-0"
+                          :options="pilihWaliKelas"
+                          v-model="dataDetail.walikelas_id"
+                          v-bind:class="{ disabled: false }"
+                        ></v-select>
                         <div class="text-xs text-red-600 mt-1">
-                          {{ errors.password }}
+                          {{ errors.walikelas_id }}
                         </div>
                       </div>
                     </div>

@@ -4,8 +4,11 @@ import { ref } from "vue";
 import BreadCrumb from "@/components/atoms/BreadCrumb.vue";
 import BreadCrumbSpace from "@/components/atoms/BreadCrumbSpace.vue";
 import ButtonEdit from "@/components/atoms/ButtonEdit.vue";
+import ButtonDel from "@/components/atoms/ButtonDel.vue";
 import { useRouter } from "vue-router";
 import { useStoreAdminBar } from "@/stores/adminBar";
+import Toast from "@/components/lib/Toast.js";
+
 const storeAdminBar = useStoreAdminBar();
 storeAdminBar.setPagesActive("kelas");
 const router = useRouter();
@@ -95,6 +98,19 @@ getData();
 const doEditData = async (id) => {
   router.push({ name: "AdminKelasEdit", params: { id } });
 };
+
+const doDeleteData = async (id, index) => {
+  if (confirm("Apakah anda yakin menghapus data ini?")) {
+    try {
+      const response = await Api.delete(`gurubk/kelas/${id}`);
+      data.value.splice(index, 1);
+      Toast.success("Success", "Data Berhasil dihapus!");
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+};
 </script>
 <template>
   <div class="pt-4 px-10 md:flex justify-between">
@@ -109,6 +125,19 @@ const doEditData = async (id) => {
         <template v-slot:content> Kelas <BreadCrumbSpace /> Index </template>
       </BreadCrumb>
     </div>
+  </div>
+
+  <div class="pt-4 px-10 md:flex justify-between">
+    <div>
+      <router-link :to="{ name: 'AdminKelasTambah' }">
+        <button
+          class="btn btn-primary hover:shadow-lg shadow text-white hover:text-gray-100 gap-2"
+        >
+          Tambah
+        </button></router-link
+      >
+    </div>
+    <div class="md:py-0 py-4 space-x-2 space-y-2"></div>
   </div>
 
   <div class="md:py-0 px-4 lg:flex flex-wrap gap-4">
@@ -134,6 +163,7 @@ const doEditData = async (id) => {
                   class="text-sm font-medium text-center flex justify-center"
                 >
                   <ButtonEdit @click="doEditData(props.row.id, props.index)" />
+                  <ButtonDel @click="doDeleteData(props.row.id, props.index)" />
                 </div>
               </span>
 
