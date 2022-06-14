@@ -103,8 +103,19 @@ getData();
       </router-link>
 
       <router-link :to="{ name: 'LandingLogin' }">
-        <h1 class="text-xs text-base-content font-bold py-2 pt-6">Login</h1>
+        <h1 class="text-xs text-base-content font-bold py-2 pt-6">Sekolah</h1>
       </router-link>
+      <a :href="VITE_API_URLFE_YAYASAN">
+        <h1 class="text-xs text-base-content font-bold py-2 pt-6">Yayasan</h1>
+      </a>
+      <a :href="VITE_API_URLFE_SISWA">
+        <h1 class="text-xs text-base-content font-bold py-2 pt-6">Siswa</h1>
+      </a>
+      <a :href="VITE_API_URLFE_ORTU">
+        <h1 class="text-xs text-base-content font-bold py-2 pt-6">
+          Wali Murid
+        </h1>
+      </a>
 
       <!-- <h1 class="text-xs text-gray-400 font-bold py-2">Installation</h1> -->
     </div>
