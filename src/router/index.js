@@ -190,6 +190,16 @@ const routes = [
         component: AdminCatatanKasusPersiswa,
       },
       {
+        path: '/pages/catatan/kasus/:id/tambah',
+        name: 'AdminCatatanKasusPersiswaTambah',
+        component: () => import("@/views/admin/catatankasus/PersiswaTambah.vue"),
+      },
+      {
+        path: '/pages/catatan/kasus/:id/edit/:id2',
+        name: 'AdminCatatanKasusPersiswaEdit',
+        component: () => import("@/views/admin/catatankasus/PersiswaEdit.vue"),
+      },
+      {
         path: '/pages/catatan/pengembangandiri',
         name: 'AdminCatatanPengembangandiri',
         component: AdminCatatanPengembangandiri,
