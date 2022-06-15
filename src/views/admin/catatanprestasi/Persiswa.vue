@@ -1,4 +1,7 @@
 <script setup>
+import moment from "moment/min/moment-with-locales";
+import localization from "moment/locale/id";
+moment.updateLocale("id", localization);
 const BASE_URL = import.meta.env.VITE_API_URL;
 import Api from "@/axios/axios";
 import { ref, watch, computed } from "vue";
@@ -35,11 +38,7 @@ let pilihKelas = ref([
 const dataAsli = ref([]);
 const dataKelas = ref([]);
 const data = ref([]);
-
-const inputCariKelas = ref({
-  label: "Semua Kelas",
-  id: "Semua Kelas",
-});
+const dataSiswa = ref([]);
 
 const columns = [
   {
@@ -95,6 +94,7 @@ const getData = async () => {
     const response = await Api.get(`gurubk/catatan/prestasi/${id}`);
     dataAsli.value = response.data;
     data.value = response.data;
+    dataSiswa.value = response.siswa;
 
     return response.data;
   } catch (error) {
@@ -144,7 +144,7 @@ const doPilihKelas = () => {
     <div>
       <span
         class="text-2xl sm:text-3xl leading-none font-bold text-base-content shadow-sm"
-        >Catatan Prestasi Siswa</span
+        >{{ dataSiswa.nama }}</span
       >
     </div>
     <div class="md:py-0 py-4">

@@ -1,4 +1,7 @@
 <script setup>
+import moment from "moment/min/moment-with-locales";
+import localization from "moment/locale/id";
+moment.updateLocale("id", localization);
 const BASE_URL = import.meta.env.VITE_API_URL;
 import Api from "@/axios/axios";
 import { ref, watch, computed } from "vue";
@@ -7,6 +10,8 @@ import BreadCrumbSpace from "@/components/atoms/BreadCrumbSpace.vue";
 import ButtonEdit from "@/components/atoms/ButtonEdit.vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStoreAdminBar } from "@/stores/adminBar";
+import Toast from "@/components/lib/Toast";
+import ButtonDelete from "@/components/atoms/ButtonDel.vue";
 
 import { useStoreGuruBk } from "@/stores/guruBk";
 const storeGuruBk = useStoreGuruBk();
@@ -21,42 +26,20 @@ const router = useRouter();
 const route = useRoute();
 
 const id = route.params.id;
-let pilihKelas = ref([
-  {
-    label: "Semua Kelas",
-    id: "Semua Kelas",
-  },
-  {
-    label: "Belum masuk Kelas",
-    id: "Belum masuk Kelas",
-  },
-]);
 
 const dataAsli = ref([]);
-const dataKelas = ref([]);
 const data = ref([]);
-
-const inputCariKelas = ref({
-  label: "Semua Kelas",
-  id: "Semua Kelas",
-});
+const dataSiswa = ref([]);
 
 const columns = [
   {
-    label: "No",
-    field: "no",
+    label: "Actions",
+    field: "actions",
+    sortable: false,
     width: "50px",
     tdClass: "text-center",
     thClass: "text-center",
   },
-  // {
-  //   label: "Actions",
-  //   field: "actions",
-  //   sortable: false,
-  //   width: "50px",
-  //   tdClass: "text-center",
-  //   thClass: "text-center",
-  // },
   {
     label: "Ide dan Imajinasi",
     field: "idedanimajinasi",
@@ -69,27 +52,12 @@ const columns = [
   },
 ];
 
-const getDataKelas = async () => {
-  try {
-    const response = await Api.get(`gurubk/kelas`);
-    dataKelas.value = response.data;
-    dataKelas.value.forEach((item) => {
-      pilihKelas.value.push({
-        label: `${item.nama} (${item.jml_siswa} siswa)`,
-        id: item.id,
-      });
-    });
-  } catch (error) {
-    console.error(error);
-  }
-};
-getDataKelas();
-
 const getData = async () => {
   try {
     const response = await Api.get(`gurubk/catatan/pengembangandiri/${id}`);
     dataAsli.value = response.data;
     data.value = response.data;
+    dataSiswa.value = response.siswa;
 
     return response.data;
   } catch (error) {
@@ -98,39 +66,39 @@ const getData = async () => {
 };
 getData();
 
-const doEditData = async (id) => {
-  router.push({ name: "AdminSiswaEdit", params: { id } });
+const doEditData = async (id2) => {
+  router.push({
+    name: "AdminCatatanPengembangandiriPersiswaEdit",
+    params: { id, id2 },
+  });
 };
 
-const doPilihKelas = () => {
-  if (inputCariKelas.value.id === "Semua Kelas") {
-    data.value = dataAsli.value.map((item, index) => {
-      return {
-        ...item,
-        nama: item.nama,
-      };
-    });
-  } else if (inputCariKelas.value.id === "Belum masuk Kelas") {
-    let dataFiltered = dataAsli.value.filter((item) => {
-      return item.kelas === null;
-    });
-    data.value = dataFiltered.map((item, index) => {
-      return {
-        ...item,
-        nama: item.nama,
-        kelas_nama: "Belum Masuk Kelas",
-      };
-    });
+const encode = (value) => window.btoa(value);
+
+const doCetak = (id = null, token = moment().format("YYYY-MM-Do")) => {
+  if (id === null) {
+    Toast.danger("Warning", "Data tidak valid!");
   } else {
-    let dataFiltered = dataAsli.value.filter((item) => {
-      return item.kelas_id == inputCariKelas.value.id;
-    });
-    data.value = dataFiltered.map((item, index) => {
-      return {
-        ...item,
-        nama: item.nama,
-      };
-    });
+    window.open(
+      `${BASE_URL}api/guest/cetak/catatanpengembangandiri/${encode(
+        id
+      )}?token=${encode(token)}`
+    );
+  }
+};
+
+const doDeleteData = async (dataId, index) => {
+  if (confirm("Apakah anda yakin menghapus data ini?")) {
+    try {
+      const response = await Api.delete(
+        `gurubk/catatan/pengembangandiri/${id}/data/${dataId}`
+      );
+      data.value.splice(index, 1);
+      Toast.success("Success", "Data Berhasil dihapus!");
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
   }
 };
 </script>
@@ -139,7 +107,7 @@ const doPilihKelas = () => {
     <div>
       <span
         class="text-2xl sm:text-3xl leading-none font-bold text-base-content shadow-sm"
-        >Catatan Pengembangandiri Siswa</span
+        >{{ dataSiswa.nama }}</span
       >
     </div>
     <div class="md:py-0 py-4">
@@ -153,9 +121,32 @@ const doPilihKelas = () => {
 
   <div class="pt-4 px-10 md:flex justify-between">
     <div>
-      <span
-        class="text-2xl sm:text-3xl leading-none font-bold text-gray-700 shadow-sm"
-      ></span>
+      <router-link
+        :to="{
+          name: 'AdminCatatanPengembangandiriPersiswaTambah',
+          params: { id },
+        }"
+      >
+        <buttton class="btn btn-primary">Tambah</buttton>
+      </router-link>
+      <a @click="doCetak(id)">
+        <button class="btn btn-sm">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
+            />
+          </svg>
+        </button>
+      </a>
     </div>
     <div class="md:py-0 py-4 space-x-2 space-y-2">
       <span @click="router.go(-1)">
@@ -187,6 +178,7 @@ const doPilihKelas = () => {
       <div class="bg-white shadow rounded-lg px-4 py-4">
         <div v-if="data">
           <vue-good-table
+            :line-numbers="true"
             :columns="columns"
             :rows="data"
             :search-options="{

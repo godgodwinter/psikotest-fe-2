@@ -1,4 +1,7 @@
 <script setup>
+import moment from "moment/min/moment-with-locales";
+import localization from "moment/locale/id";
+moment.updateLocale("id", localization);
 const BASE_URL = import.meta.env.VITE_API_URL;
 import Api from "@/axios/axios";
 import { ref, watch, computed } from "vue";
@@ -136,6 +139,19 @@ const doPilihKelas = () => {
     });
   }
 };
+const encode = (value) => window.btoa(value);
+
+const doCetak = (id = null, token = moment().format("YYYY-MM-Do")) => {
+  if (id === null) {
+    Toast.danger("Warning", "Data tidak valid!");
+  } else {
+    window.open(
+      `${BASE_URL}api/guest/cetak/catatanprestasi/${encode(id)}?token=${encode(
+        token
+      )}`
+    );
+  }
+};
 </script>
 <template>
   <div class="pt-4 px-10 md:flex justify-between">
@@ -192,13 +208,7 @@ const doPilihKelas = () => {
                 <div
                   class="text-sm font-medium text-center flex justify-center space-x-1"
                 >
-                  <router-link
-                    target="_blank"
-                    :to="{
-                      name: 'AdminCatatanPrestasiPersiswa',
-                      params: { id: props.row.id },
-                    }"
-                  >
+                  <a @click="doCetak(props.row.id)">
                     <button class="btn btn-sm">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -215,7 +225,7 @@ const doPilihKelas = () => {
                         />
                       </svg>
                     </button>
-                  </router-link>
+                  </a>
                   <router-link
                     :to="{
                       name: 'AdminCatatanPrestasiPersiswa',
