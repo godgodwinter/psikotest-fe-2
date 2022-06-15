@@ -18,7 +18,7 @@ storeGuruBk.$subscribe((mutation, state) => {
 });
 
 const storeAdminBar = useStoreAdminBar();
-storeAdminBar.setPagesActive("kasus");
+storeAdminBar.setPagesActive("prestasi");
 const router = useRouter();
 const route = useRoute();
 
@@ -32,7 +32,7 @@ const dataDetail = ref([]);
 
 const getData = async () => {
   try {
-    const response = await Api.get(`gurubk/catatan/kasus/${id}`);
+    const response = await Api.get(`gurubk/catatan/prestasi/${id}`);
     dataAsli.value = response.data;
     data.value = response.data;
     dataSiswa.value = response.siswa;
@@ -51,7 +51,7 @@ const doCetak = (id = null, token = moment().format("YYYY-MM-Do")) => {
     Toast.danger("Warning", "Data tidak valid!");
   } else {
     window.open(
-      `${BASE_URL}api/guest/cetak/catatankasus/${encode(id)}?token=${encode(
+      `${BASE_URL}api/guest/cetak/catatanprestasi/${encode(id)}?token=${encode(
         token
       )}`
     );
@@ -64,22 +64,19 @@ const onSubmit = () => {
 
 const doStoreData = async (d) => {
   let dataStore = {
-    kasus: dataDetail.value.kasus,
     tanggal: dataDetail.value.tanggal,
-    pengambilandata: dataDetail.value.pengambilandata,
-    sumberkasus: dataDetail.value.sumberkasus,
-    golkasus: dataDetail.value.golkasus,
-    penyebabtimbulkasus: dataDetail.value.penyebabtimbulkasus,
-    teknikkonseling: dataDetail.value.teknikkonseling,
-    keberhasilanpenanganankasus: dataDetail.value.keberhasilanpenanganankasus,
-    keterangan: dataDetail.value.keterangan,
+    prestasi: dataDetail.value.prestasi,
+    teknikbelajar: dataDetail.value.teknikbelajar,
+    saranabelajar: dataDetail.value.saranabelajar,
+    penunjangbelajar: dataDetail.value.penunjangbelajar,
+    kesimpulandansaran: dataDetail.value.kesimpulandansaran,
   };
   try {
-    const response = await Api.post(`gurubk/catatan/kasus/${id}`, dataStore);
+    const response = await Api.post(`gurubk/catatan/prestasi/${id}`, dataStore);
     Toast.success("Success", "Data Berhasil ditambahkan!");
     // resetForm();
     router.push({
-      name: "AdminCatatanKasusPersiswa",
+      name: "AdminCatatanPrestasiPersiswa",
       params: { id, id2 },
     });
 
@@ -186,151 +183,93 @@ const doStoreData = async (d) => {
                         <label
                           for="name"
                           class="text-sm font-medium text-gray-900 block mb-2"
-                          >Kasus</label
+                          >Prestasi</label
                         >
                         <Field
-                          v-model="dataDetail.kasus"
+                          v-model="dataDetail.prestasi"
                           :rules="validateData"
                           type="text"
-                          name="kasus"
-                          ref="kasus"
+                          name="prestasi"
+                          ref="prestasi"
                           class="input input-bordered md:w-full max-w-2xl"
                           required
                         />
                         <div class="text-xs text-red-600 mt-1">
-                          {{ errors.kasus }}
+                          {{ errors.prestasi }}
                         </div>
                       </div>
                       <div>
                         <label
                           for="name"
                           class="text-sm font-medium text-gray-900 block mb-2"
-                          >Pengambilan data</label
+                          >Teknik Belajar</label
                         >
                         <Field
-                          v-model="dataDetail.pengambilandata"
+                          v-model="dataDetail.teknikbelajar"
                           :rules="validateData"
                           type="text"
-                          name="pengambilandata"
-                          ref="pengambilandata"
+                          name="teknikbelajar"
+                          ref="teknikbelajar"
                           class="input input-bordered md:w-full max-w-2xl"
                           required
                         />
                         <div class="text-xs text-red-600 mt-1">
-                          {{ errors.pengambilandata }}
+                          {{ errors.teknikbelajar }}
                         </div>
                       </div>
                       <div>
                         <label
                           for="name"
                           class="text-sm font-medium text-gray-900 block mb-2"
-                          >Sumber kasus</label
+                          >Saran Belajar</label
                         >
                         <Field
-                          v-model="dataDetail.sumberkasus"
+                          v-model="dataDetail.saranabelajar"
                           :rules="validateData"
                           type="text"
-                          name="sumberkasus"
-                          ref="sumberkasus"
+                          name="saranabelajar"
+                          ref="saranabelajar"
                           class="input input-bordered md:w-full max-w-2xl"
                           required
                         />
                         <div class="text-xs text-red-600 mt-1">
-                          {{ errors.sumberkasus }}
+                          {{ errors.saranabelajar }}
                         </div>
                       </div>
-                      <div>
-                        <label
-                          for="name"
-                          class="text-sm font-medium text-gray-900 block mb-2"
-                          >Golongan kasus</label
-                        >
-                        <select
-                          class="select select-bordered w-full max-w-xs"
-                          v-model="dataDetail.golkasus"
-                          name="golkasus"
-                          ref="golkasus"
-                        >
-                          <option disabled selected>Pilih ?</option>
-                          <option>Sedang</option>
-                          <option>Ringan</option>
-                        </select>
 
-                        <div class="text-xs text-red-600 mt-1">
-                          {{ errors.golkasus }}
-                        </div>
-                      </div>
                       <div>
                         <label
                           for="name"
                           class="text-sm font-medium text-gray-900 block mb-2"
-                          >Penyebab timbul kasus</label
+                          >Penunjang Belajar</label
                         >
                         <Field
-                          v-model="dataDetail.penyebabtimbulkasus"
+                          v-model="dataDetail.penunjangbelajar"
                           :rules="validateData"
                           type="text"
-                          name="penyebabtimbulkasus"
-                          ref="penyebabtimbulkasus"
+                          name="penunjangbelajar"
+                          ref="penunjangbelajar"
                           class="input input-bordered md:w-full max-w-2xl"
                           required
                         />
                         <div class="text-xs text-red-600 mt-1">
-                          {{ errors.penyebabtimbulkasus }}
+                          {{ errors.penunjangbelajar }}
                         </div>
                       </div>
                       <div>
                         <label
                           for="name"
                           class="text-sm font-medium text-gray-900 block mb-2"
-                          >Teknik Konseling</label
+                          >Kesimpulan dan Saran</label
                         >
-                        <Field
-                          v-model="dataDetail.teknikkonseling"
-                          :rules="validateData"
-                          type="text"
-                          name="teknikkonseling"
-                          ref="teknikkonseling"
-                          class="input input-bordered md:w-full max-w-2xl"
-                          required
-                        />
-                        <div class="text-xs text-red-600 mt-1">
-                          {{ errors.teknikkonseling }}
-                        </div>
-                      </div>
-                      <div>
-                        <label
-                          for="name"
-                          class="text-sm font-medium text-gray-900 block mb-2"
-                          >Keberhasilan Penanganan kasus</label
-                        >
-                        <Field
-                          v-model="dataDetail.keberhasilanpenanganankasus"
-                          :rules="validateData"
-                          type="text"
-                          name="keberhasilanpenanganankasus"
-                          ref="keberhasilanpenanganankasus"
-                          class="input input-bordered md:w-full max-w-2xl"
-                          required
-                        />
-                        <div class="text-xs text-red-600 mt-1">
-                          {{ errors.keberhasilanpenanganankasus }}
-                        </div>
-                      </div>
-                      <div>
-                        <label
-                          for="name"
-                          class="text-sm font-medium text-gray-900 block mb-2"
-                          >Keterangan</label
-                        >
-
                         <textarea
-                          v-model="dataDetail.keterangan"
+                          v-model="dataDetail.kesimpulandansaran"
                           class="textarea textarea-accent md:w-full max-w-2xl"
                           placeholder=""
                         ></textarea>
+
                         <div class="text-xs text-red-600 mt-1">
-                          {{ errors.keterangan }}
+                          {{ errors.kesimpulandansaran }}
                         </div>
                       </div>
                     </div>

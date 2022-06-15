@@ -10,6 +10,8 @@ import BreadCrumbSpace from "@/components/atoms/BreadCrumbSpace.vue";
 import ButtonEdit from "@/components/atoms/ButtonEdit.vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStoreAdminBar } from "@/stores/adminBar";
+import Toast from "@/components/lib/Toast.js";
+import ButtonDelete from "@/components/atoms/ButtonDel.vue";
 
 import { useStoreGuruBk } from "@/stores/guruBk";
 const storeGuruBk = useStoreGuruBk();
@@ -24,16 +26,6 @@ const router = useRouter();
 const route = useRoute();
 
 const id = route.params.id;
-let pilihKelas = ref([
-  {
-    label: "Semua Kelas",
-    id: "Semua Kelas",
-  },
-  {
-    label: "Belum masuk Kelas",
-    id: "Belum masuk Kelas",
-  },
-]);
 
 const dataAsli = ref([]);
 const dataKelas = ref([]);
@@ -42,20 +34,13 @@ const dataSiswa = ref([]);
 
 const columns = [
   {
-    label: "No",
-    field: "no",
+    label: "Actions",
+    field: "actions",
+    sortable: false,
     width: "50px",
     tdClass: "text-center",
     thClass: "text-center",
   },
-  // {
-  //   label: "Actions",
-  //   field: "actions",
-  //   sortable: false,
-  //   width: "50px",
-  //   tdClass: "text-center",
-  //   thClass: "text-center",
-  // },
   {
     label: "Prestasi",
     field: "prestasi",
@@ -71,23 +56,12 @@ const columns = [
     field: "saranabelajar",
     type: "String",
   },
+  {
+    label: "Penulis",
+    field: "penulis",
+    type: "String",
+  },
 ];
-
-const getDataKelas = async () => {
-  try {
-    const response = await Api.get(`gurubk/kelas`);
-    dataKelas.value = response.data;
-    dataKelas.value.forEach((item) => {
-      pilihKelas.value.push({
-        label: `${item.nama} (${item.jml_siswa} siswa)`,
-        id: item.id,
-      });
-    });
-  } catch (error) {
-    console.error(error);
-  }
-};
-getDataKelas();
 
 const getData = async () => {
   try {
@@ -103,39 +77,39 @@ const getData = async () => {
 };
 getData();
 
-const doEditData = async (id) => {
-  router.push({ name: "AdminSiswaEdit", params: { id } });
+const doEditData = async (id2) => {
+  router.push({
+    name: "AdminCatatanPrestasiPersiswaEdit",
+    params: { id, id2 },
+  });
 };
 
-const doPilihKelas = () => {
-  if (inputCariKelas.value.id === "Semua Kelas") {
-    data.value = dataAsli.value.map((item, index) => {
-      return {
-        ...item,
-        nama: item.nama,
-      };
-    });
-  } else if (inputCariKelas.value.id === "Belum masuk Kelas") {
-    let dataFiltered = dataAsli.value.filter((item) => {
-      return item.kelas === null;
-    });
-    data.value = dataFiltered.map((item, index) => {
-      return {
-        ...item,
-        nama: item.nama,
-        kelas_nama: "Belum Masuk Kelas",
-      };
-    });
+const encode = (value) => window.btoa(value);
+
+const doCetak = (id = null, token = moment().format("YYYY-MM-Do")) => {
+  if (id === null) {
+    Toast.danger("Warning", "Data tidak valid!");
   } else {
-    let dataFiltered = dataAsli.value.filter((item) => {
-      return item.kelas_id == inputCariKelas.value.id;
-    });
-    data.value = dataFiltered.map((item, index) => {
-      return {
-        ...item,
-        nama: item.nama,
-      };
-    });
+    window.open(
+      `${BASE_URL}api/guest/cetak/catatanprestasi/${encode(id)}?token=${encode(
+        token
+      )}`
+    );
+  }
+};
+
+const doDeleteData = async (dataId, index) => {
+  if (confirm("Apakah anda yakin menghapus data ini?")) {
+    try {
+      const response = await Api.delete(
+        `gurubk/catatan/prestasi/${id}/data/${dataId}`
+      );
+      data.value.splice(index, 1);
+      Toast.success("Success", "Data Berhasil dihapus!");
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
   }
 };
 </script>
@@ -156,9 +130,32 @@ const doPilihKelas = () => {
 
   <div class="pt-4 px-10 md:flex justify-between">
     <div>
-      <span
-        class="text-2xl sm:text-3xl leading-none font-bold text-gray-700 shadow-sm"
-      ></span>
+      <router-link
+        :to="{
+          name: 'AdminCatatanPrestasiPersiswaTambah',
+          params: { id },
+        }"
+      >
+        <buttton class="btn btn-primary">Tambah</buttton>
+      </router-link>
+      <a @click="doCetak(id)">
+        <button class="btn btn-sm">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
+            />
+          </svg>
+        </button>
+      </a>
     </div>
     <div class="md:py-0 py-4 space-x-2 space-y-2">
       <span @click="router.go(-1)">
@@ -190,6 +187,7 @@ const doPilihKelas = () => {
       <div class="bg-white shadow rounded-lg px-4 py-4">
         <div v-if="data">
           <vue-good-table
+            line-numbers="true"
             :columns="columns"
             :rows="data"
             :search-options="{
@@ -204,13 +202,20 @@ const doPilihKelas = () => {
           >
             <template #table-row="props">
               <span v-if="props.column.field == 'actions'">
-                <div
-                  class="text-sm font-medium text-center flex justify-center space-x-0"
-                >
-                  <ButtonEdit @click="doEditData(props.row.id, props.index)" />
-                  <ButtonDelete
-                    @click="doDeleteData(props.row.id, props.index)"
-                  />
+                <div>
+                  <div v-if="props.row.penulis == 'admin'"></div>
+                  <div
+                    v-else-if="props.row.penulis == 'gurubk'"
+                    class="text-sm font-medium text-center flex justify-center space-x-0"
+                  >
+                    <ButtonEdit
+                      @click="doEditData(props.row.id, props.index)"
+                    />
+                    <ButtonDelete
+                      @click="doDeleteData(props.row.id, props.index)"
+                    />
+                  </div>
+                  <div v-else></div>
                 </div>
               </span>
 
@@ -218,6 +223,13 @@ const doPilihKelas = () => {
                 <div class="text-center">{{ props.index + 1 }}</div>
               </span>
 
+              <span v-else-if="props.column.field == 'penulis'">
+                <div class="text-center">
+                  <p v-if="props.row.penulis == 'admin'">Admin</p>
+                  <p v-else-if="props.row.penulis == 'gurubk'">Sekolah</p>
+                  <p v-else>Ortu / Walimurid</p>
+                </div>
+              </span>
               <span v-else>
                 {{ props.formattedRow[props.column.field] }}
               </span>

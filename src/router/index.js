@@ -229,6 +229,16 @@ const routes = [
         name: 'AdminCatatanPrestasiPersiswa',
         component: AdminCatatanPrestasiPersiswa,
       },
+      {
+        path: '/pages/catatan/prestasi/:id/tambah',
+        name: 'AdminCatatanPrestasiPersiswaTambah',
+        component: () => import("@/views/admin/catatanprestasi/PersiswaTambah.vue"),
+      },
+      {
+        path: '/pages/catatan/prestasi/:id/edit/:id2',
+        name: 'AdminCatatanPrestasiPersiswaEdit',
+        component: () => import("@/views/admin/catatanprestasi/PersiswaEdit.vue"),
+      },
     ]
   },
 ];

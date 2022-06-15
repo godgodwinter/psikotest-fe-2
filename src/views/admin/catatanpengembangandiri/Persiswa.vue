@@ -50,6 +50,11 @@ const columns = [
     field: "ketrampilan",
     type: "String",
   },
+  {
+    label: "Penulis",
+    field: "penulis",
+    type: "String",
+  },
 ];
 
 const getData = async () => {
@@ -193,13 +198,20 @@ const doDeleteData = async (dataId, index) => {
           >
             <template #table-row="props">
               <span v-if="props.column.field == 'actions'">
-                <div
-                  class="text-sm font-medium text-center flex justify-center space-x-0"
-                >
-                  <ButtonEdit @click="doEditData(props.row.id, props.index)" />
-                  <ButtonDelete
-                    @click="doDeleteData(props.row.id, props.index)"
-                  />
+                <div>
+                  <div v-if="props.row.penulis == 'admin'"></div>
+                  <div
+                    v-else-if="props.row.penulis == 'gurubk'"
+                    class="text-sm font-medium text-center flex justify-center space-x-0"
+                  >
+                    <ButtonEdit
+                      @click="doEditData(props.row.id, props.index)"
+                    />
+                    <ButtonDelete
+                      @click="doDeleteData(props.row.id, props.index)"
+                    />
+                  </div>
+                  <div v-else></div>
                 </div>
               </span>
 
@@ -207,6 +219,13 @@ const doDeleteData = async (dataId, index) => {
                 <div class="text-center">{{ props.index + 1 }}</div>
               </span>
 
+              <span v-else-if="props.column.field == 'penulis'">
+                <div class="text-center">
+                  <p v-if="props.row.penulis == 'admin'">Admin</p>
+                  <p v-else-if="props.row.penulis == 'gurubk'">Sekolah</p>
+                  <p v-else>Ortu / Walimurid</p>
+                </div>
+              </span>
               <span v-else>
                 {{ props.formattedRow[props.column.field] }}
               </span>
