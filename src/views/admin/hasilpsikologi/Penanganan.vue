@@ -1,4 +1,13 @@
 <script setup>
+import ButtonCetak from "@/components/atoms/ButtonCetak.vue";
+import moment from "moment/min/moment-with-locales";
+import localization from "moment/locale/id";
+moment.updateLocale("id", localization);
+
+const BASE_URL = import.meta.env.VITE_API_URL
+  ? import.meta.env.VITE_API_URL
+  : "http://localhost:8000/";
+
 import CardLockedFitur from "@/components/organismes/CardLockedFitur.vue";
 import Api from "@/axios/axios";
 import { ref, computed } from "vue";
@@ -139,6 +148,20 @@ const singkatan = (item = 99) => {
   }
   return hasil;
 };
+
+const encode = (value) => window.btoa(value);
+
+const doCetak = (id = null, token = moment().format("YYYY-MM-Do")) => {
+  if (id === null) {
+    Toast.danger("Warning", "Data tidak valid!");
+  } else {
+    window.open(
+      `${BASE_URL}api/guest/cetak/penanganan/${encode(id)}?token=${encode(
+        token
+      )}`
+    );
+  }
+};
 </script>
 <template>
   <div class="pt-4 px-10 md:flex justify-between">
@@ -159,9 +182,10 @@ const singkatan = (item = 99) => {
   <div class="pt-4 px-10 md:flex justify-between">
     <div>
       <span
-        class="text-2xl sm:text-3xl leading-none font-bold text-gray-700 shadow-sm"
+        class="text-2xl sm:text-3xl leading-none font-bold text-gray-700 shadow-sm px-2"
         >Penanganan Deteksi Masalah</span
       >
+      <ButtonCetak @click="doCetak(id)" />
     </div>
     <div class="md:py-0 py-4 space-x-2 space-y-2">
       <router-link :to="{ name: 'AdminHasilPsikologi' }">
