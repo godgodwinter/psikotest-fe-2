@@ -144,7 +144,7 @@ const singkatan = (item = 99) => {
   } else if (21 > item && item >= 11) {
     hasil = "Rendah Sekali / Terkendali Baik Sekali";
   } else {
-    hasil = "Sangat Rendah Sekali / Sangan Terkendali Baik Sekali ";
+    hasil = "Sangat Rendah Sekali / Sangat Terkendali Baik Sekali ";
   }
   return hasil;
 };
@@ -269,7 +269,7 @@ const doCetak = (id = null, token = moment().format("YYYY-MM-Do")) => {
               <div v-for="(item, index) in data" class="space-y-2">
                 <h1 class="text-lg font-bold text-gray-700">
                   {{ index + 1 }}. {{ item.nama }} : {{ item.score }} -
-                  {{ singkatan(item.keterangan) }}
+                  {{ singkatan(item.score) }}
                 </h1>
                 <p class="indent-8 text-gray-700">{{ item.penanganan }}</p>
               </div>
