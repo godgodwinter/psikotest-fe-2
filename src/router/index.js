@@ -180,9 +180,19 @@ const routes = [
         component: AdminAnalisaMinatBakat,
       },
       {
+        path: '/pages/analisaminatbakat/:id',
+        name: 'AdminAnalisaMinatBakatTambah',
+        component: () => import("@/views/admin/analisaminatbakat/Tambah.vue"),
+      },
+      {
         path: '/pages/analisanpenjurusan',
         name: 'AdminAnalisaPenjurusan',
         component: AdminAnalisaPenjurusan,
+      },
+      {
+        path: '/pages/analisanpenjurusan/:id',
+        name: 'AdminAnalisaPenjurusanTambah',
+        component: () => import("@/views/admin/analisanpenjurusan/Tambah.vue"),
       },
       {
         path: '/pages/catatan/kasus',
