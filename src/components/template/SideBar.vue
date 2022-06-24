@@ -381,6 +381,79 @@ const pagesActiveClass = ref(
                 <span class="ml-3">Catatan Prestasi Siswa </span>
               </router-link>
             </li>
+            <li
+              class="lg:w-full py-0"
+              :class="[pagesActive == 'klasifikasi' ? pagesActiveClass : '']"
+            >
+              <router-link
+                :to="{ name: 'AdminKlasifikasi' }"
+                class="text-base-content font-normal rounded-lg flex items-center p-2 group hover:link"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M2 5a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm14 1a1 1 0 11-2 0 1 1 0 012 0zM2 13a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 01-2 2H4a2 2 0 01-2-2v-2zm14 1a1 1 0 11-2 0 1 1 0 012 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="ml-3">Klasifikasi Akademis dan Profesi </span>
+              </router-link>
+            </li>
+            <li
+              class="lg:w-full py-0"
+              :class="[pagesActive == 'referensistudi' ? pagesActiveClass : '']"
+            >
+              <router-link
+                :to="{ name: 'AdminReferensiStudi' }"
+                class="text-base-content font-normal rounded-lg flex items-center p-2 group hover:link"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                  />
+                </svg>
+                <span class="ml-3">Referensi Studi & Kerja </span>
+              </router-link>
+            </li>
+            <li
+              class="lg:w-full py-0"
+              :class="[pagesActive == 'buletin' ? pagesActiveClass : '']"
+            >
+              <router-link
+                :to="{ name: 'AdminBuletin' }"
+                class="text-base-content font-normal rounded-lg flex items-center p-2 group hover:link"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"
+                  />
+                </svg>
+                <span class="ml-3">Buletin Psikologi </span>
+              </router-link>
+            </li>
           </ul>
         </div>
       </div>

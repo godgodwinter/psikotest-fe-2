@@ -244,6 +244,36 @@ const routes = [
         name: 'AdminCatatanPrestasiPersiswaEdit',
         component: () => import("@/views/admin/catatanprestasi/PersiswaEdit.vue"),
       },
+      {
+        path: '/pages/data/catatan/klasifikasi',
+        name: 'AdminKlasifikasi',
+        component: () => import("@/views/admin/data/Klasifikasi.vue"),
+      },
+      {
+        path: '/pages/data/catatan/klasifikasi/:id',
+        name: 'AdminKlasifikasiDetail',
+        component: () => import("@/views/admin/data/KlasifikasiDetail.vue"),
+      },
+      {
+        path: '/pages/data/catatan/referensistudi',
+        name: 'AdminReferensiStudi',
+        component: () => import("@/views/admin/data/ReferensiStudi.vue"),
+      },
+      {
+        path: '/pages/data/catatan/referensistudi/:id',
+        name: 'AdminReferensiStudiDetail',
+        component: () => import("@/views/admin/data/ReferensiStudiDetail.vue"),
+      },
+      {
+        path: '/pages/data/catatan/buletin',
+        name: 'AdminBuletin',
+        component: () => import("@/views/admin/data/Buletin.vue"),
+      },
+      {
+        path: '/pages/data/catatan/buletin/:id',
+        name: 'AdminBuletinDetail',
+        component: () => import("@/views/admin/data/BuletinDetail.vue"),
+      },
     ]
   },
 ];
