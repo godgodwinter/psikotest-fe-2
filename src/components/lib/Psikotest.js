@@ -1,6 +1,21 @@
 const getKelas = (item = "") => {
+    let response = null;
+    if (item.indexOf("/") > 0) {
+        // console.log('1');
+        response = item ? item.split("/") : null;
+    } else if (item.indexOf("-") > 0) {
+        // console.log('2');
+        response = item ? item.split("-") : null;
+    } else if (item.indexOf(".") > 0) {
+        // console.log('3');
+        response = item ? item.split(".") : null;
+    } else {
+        // console.log('4');
+        response = item ? item.split(" ") : null;
+    }
+    // console.log(item, response[0], item.indexOf("-"));
     // function split string
-    let response = item ? item.split("/") : null;
+    // let response = item ? item.split("/") : null;
 
     return response ? response[0] : null;
 };

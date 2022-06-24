@@ -160,6 +160,11 @@ const routes = [
         component: AdminHasilPsikologiSertifikat,
       },
       {
+        path: '/pages/hasilpsikologi/kecerdasanmajemuk/:id',
+        name: 'AdminHasilPsikologiKecerdasanMajemuk',
+        component: () => import("@/views/admin/hasilpsikologi/KecerdasanMajemuk.vue"),
+      },
+      {
         path: '/pages/hasilpsikologi/terapis/:id',
         name: 'AdminHasilPsikologiTerapis',
         component: AdminHasilPsikologiTerapis,
