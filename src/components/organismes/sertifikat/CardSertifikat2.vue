@@ -156,7 +156,7 @@ const kecerdasanList = ref([
                 <tr>
                   <td class="whitespace-nowrap w-1/100">I.</td>
                   <td class="whitespace-nowrap w-1/100">
-                    IQ (Intelegence Quotient) / CFIT
+                    IQ (Intelegence Quotient) / IST
                   </td>
                   <td class="whitespace-nowrap w-1/100">:</td>
                   <td class="whitespace-nowrap w-1/100">
@@ -547,7 +547,7 @@ const kecerdasanList = ref([
             Potensi kecerdasan subyek yang dapat digunakan saat ini
             <b> {{ siswa.iq }}</b
             >,(IQ=<b>{{ siswa.iq }}</b
-            >, CFIT = <b>{{ siswa.sertifikat.iq_persen }}%)</b> artinya dengan
+            >, IST = <b>{{ siswa.sertifikat.iq_persen }}%)</b> artinya dengan
             tingkat kemampuan menggunakan kecerdasan majemuk tergolong
             <b>{{ siswa.iqh }}</b
             >.
