@@ -226,7 +226,6 @@ const ListTampilkan = ref([
   { label: "Pekerjaan Kakek", id: "pekerjaankakek", checked: false },
   { label: "Analisa Pekerjaan", id: "analisapekerjaan", checked: false },
 ]);
-
 const onToggleList = (index) => {
   ListTampilkan.value[index].checked = !ListTampilkan.value[index].checked;
 
@@ -234,9 +233,9 @@ const onToggleList = (index) => {
     columns.value.push({
       label: ListTampilkan.value[index].label,
       field: ListTampilkan.value[index].id,
-      // field: `siswadetailwithsertifikat.apiprobkwithsertifikat.apiprobk_sertifikat.${ListTampilkan.value[index].id}`,
-      // field: `siswadetailwithsertifikat`,
-      type: "String",
+      type: ListTampilkan.value[index].type
+        ? ListTampilkan.value[index].type
+        : "String",
     });
   } else {
     columns.value.forEach((item, index2) => {
@@ -245,18 +244,9 @@ const onToggleList = (index) => {
       }
     });
   }
-
-  // console.log("====================================");
-  // console.log(
-  //   index,
-  //   ListTampilkan.value[index].label,
-  //   ListTampilkan.value[index].id,
-  //   ListTampilkan.value[index].checked
-  // );
-  // console.log("====================================");
 };
 
-const listData = ref("minat_pekerjaan_1");
+const listData = ref("kb_persen");
 watch(ListTampilkan.value, (newValue, oldValue) => {
   listData.value = [];
   ListTampilkan.value.forEach((item, index) => {
