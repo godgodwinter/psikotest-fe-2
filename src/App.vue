@@ -11,7 +11,7 @@
 // luxury
 </script>
 <template>
-  <div id="app" data-theme="cupcake" class="min-h-screen">
+  <div id="app" data-theme="emerald" class="min-h-screen">
     <router-view />
   </div>
 </template>
