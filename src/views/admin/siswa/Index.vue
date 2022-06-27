@@ -1,4 +1,8 @@
 <script setup>
+import moment from "moment/min/moment-with-locales";
+import localization from "moment/locale/id";
+moment.updateLocale("id", localization);
+const BASE_URL = import.meta.env.VITE_API_URL;
 import Api from "@/axios/axios";
 import { ref } from "vue";
 import BreadCrumb from "@/components/atoms/BreadCrumb.vue";
@@ -160,6 +164,21 @@ const doCopyClipboard = (item) => {
   navigator.clipboard.writeText(item);
   Toast.babeng("Info", `${item} berhasil disalin`);
 };
+
+// const encode = (value) => window.btoa(value);
+
+// const doCetak = (id = null, token = moment().format("YYYY-MM-Do")) => {
+//   console.log(inputCariKelas.value);
+//   // if (id === null) {
+//   //   Toast.danger("Warning", "Data tidak valid!");
+//   // } else {
+//   //   window.open(
+//   //     `${BASE_URL}api/guest/cetak/catatankasus/${encode(id)}?token=${encode(
+//   //       token
+//   //     )}`
+//   //   );
+//   // }
+// };
 </script>
 <template>
   <div class="pt-4 px-10 md:flex justify-between">
@@ -188,6 +207,27 @@ const doCopyClipboard = (item) => {
           <button class="btn btn-sm btn-info p-2" @click="doPilihKelas()">
             Cari
           </button>
+
+          <!-- <button
+            class="btn hover:shadow-lg btn-success shadow text-white hover:text-gray-100 gap-2"
+            @click="doCetak()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
+              />
+            </svg>
+            Export
+          </button> -->
         </div>
       </div>
     </div>
