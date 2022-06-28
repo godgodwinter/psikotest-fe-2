@@ -281,11 +281,47 @@ const fnValidateFile = (file) => {
   }
 };
 
+const fnDoUploadFile = async (file, jenis) => {
+  let link = "";
+  if (jenis == "logosekolah") {
+    link = `gurubk/myprofile/upload/logosekolah`;
+  } else if (jenis == "kepalasekolah") {
+    link = `gurubk/myprofile/upload/kepalasekolah`;
+  } else {
+    link = `gurubk/myprofile/upload/gurubk`;
+  }
+
+  let formData = new FormData();
+  formData.append("file", file);
+  //   formData.append("file", file.value.files[0]);
+  //   let dataStore = {
+  //     file: file,
+  //   };
+  try {
+    // const response = await Api.post(link, dataStore);
+
+    const response = await Api.post(link, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    Toast.success("Success", "Data Berhasil update!");
+    // router.go();
+    // resetForm();
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    Toast.danger("Warning", "Data gagal ditambahkan!");
+    console.error(error);
+  }
+};
+
 const photoLogoSekolah = ref(null);
 const photoLogoSekolahFile = ref(null);
 const doUploadLogoSekolah = () => {
   if (fnValidateFile(photoLogoSekolahFile.value)) {
-    Toast.babeng("Info", "Fitur belum tersedia!");
+    fnDoUploadFile(photoLogoSekolahFile.value, "logosekolah");
+    // Toast.babeng("Info", "Fitur belum tersedia!");
   }
 };
 const onChangePhotoLogoSekolah = (e) => {
@@ -299,7 +335,8 @@ const photoKepalaSekolah = ref(null);
 const photoKepalaSekolahFile = ref(null);
 const doUploadPhotoKepalaSekolah = () => {
   if (fnValidateFile(photoKepalaSekolahFile.value)) {
-    Toast.babeng("Info", "Fitur belum tersedia!");
+    fnDoUploadFile(photoKepalaSekolahFile.value, "kepalasekolah");
+    // Toast.babeng("Info", "Fitur belum tersedia!");
   }
 };
 const onChangePhotoKepalaSekolah = (e) => {
@@ -313,7 +350,8 @@ const photoUser = ref(null);
 const photoUserFile = ref(null);
 const doUploadUser = () => {
   if (fnValidateFile(photoUserFile.value)) {
-    Toast.babeng("Info", "Fitur belum tersedia!");
+    fnDoUploadFile(photoUserFile.value, "gurubk");
+    // Toast.babeng("Info", "Fitur belum tersedia!");
   }
 };
 const onChangePhotoUser = (e) => {
