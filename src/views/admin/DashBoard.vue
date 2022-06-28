@@ -196,11 +196,11 @@ const doStoreData = async (d) => {
     </div>
   </div>
 
-  <div class="px-4 py-4">
+  <!-- <div class="px-4 py-4">
     <h3 class="font-bold">Update Profile</h3>
-  </div>
+  </div> -->
 
-  <div class="px-4 py-0">
+  <!-- <div class="px-4 py-0">
     <div class="w-full">
       <div class="bg-base-100 shadow rounded-lg px-0 py-0">
         <div class="w-full lg:w-fi mx-0">
@@ -258,13 +258,9 @@ const doStoreData = async (d) => {
                           class="select select-bordered w-full max-w-xs"
                           disabled
                         >
-                          <!-- <option disabled selected>Pilih Status ?</option> -->
                           <option>Aktif</option>
                           <option>Nonaktif</option>
                         </select>
-                        <!-- <div class="text-xs text-red-600 mt-1">
-                          {{ errors.status }}
-                        </div> -->
                       </div>
                       <div>
                         <label
@@ -285,44 +281,6 @@ const doStoreData = async (d) => {
                           {{ errors.kepsek_nama }}
                         </div>
                       </div>
-                      <!-- <div>
-                        <label
-                          for="name"
-                          class="text-sm font-medium text-base-content block mb-2"
-                          >Tahun Ajaran</label
-                        >
-                        <Field
-                          v-model="dataDetail.tahunajaran_nama"
-                          :rules="validateData"
-                          type="text"
-                          name="tahunajaran_nama"
-                          ref="tahunajaran_nama"
-                          class="input input-bordered md:w-full max-w-2xl"
-                          required
-                        />
-                        <div class="text-xs text-red-600 mt-1">
-                          {{ errors.tahunajaran_nama }}
-                        </div>
-                      </div>
-                      <div>
-                        <label
-                          for="name"
-                          class="text-sm font-medium text-base-content block mb-2"
-                          >Semester</label
-                        >
-                        <Field
-                          v-model="dataDetail.semester_nama"
-                          :rules="validateData"
-                          type="text"
-                          name="semester_nama"
-                          ref="semester_nama"
-                          class="input input-bordered md:w-full max-w-2xl"
-                          required
-                        />
-                        <div class="text-xs text-red-600 mt-1">
-                          {{ errors.semester_nama }}
-                        </div>
-                      </div> -->
                       <div>
                         <label
                           for="name"
@@ -393,7 +351,7 @@ const doStoreData = async (d) => {
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <div class="px-4 py-4">
     <h3 class="font-bold">Update Photo</h3>
