@@ -90,6 +90,11 @@ const routes = [
         component: DashBoard,
       },
       {
+        path: '/pages/settings/profile',
+        name: 'AdminSettingsProfile',
+        component: () => import("@/views/admin/settings/MyProfile.vue"),
+      },
+      {
         path: '/pages/siswa',
         name: 'AdminSiswa',
         component: AdminSiswa,
