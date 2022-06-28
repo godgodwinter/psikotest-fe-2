@@ -325,16 +325,19 @@ const onChangePhotoUser = (e) => {
 
 const getDataPhoto = async () => {
   try {
-    const response = await Api.get(`gurubk/myprofile/getphoto`);
+    const response = await Api.get(`gurubk/myprofile/upload/getphoto`);
     // console.log(response.data);
-    photoLogoSekolah.value = response.data.logo_sekolah;
-    photoKepalaSekolah.value = response.data.photo_kepala_sekolah;
-    photoUser.value = response.data.photo_user;
+
+    photoLogoSekolah.value = response.data.logosekolah;
+    photoKepalaSekolah.value = response.data.kepalasekolah;
+    photoUser.value = response.data.user;
     return response.data;
   } catch (error) {
     console.error(error);
   }
 };
+
+getDataPhoto();
 </script>
 <template>
   <div class="pt-4 px-10 md:flex justify-between">
@@ -818,6 +821,14 @@ const getDataPhoto = async () => {
           </button>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="collapse collapse-arrow shadow-sm border border-spacing-1">
+    <input type="checkbox" />
+    <div class="collapse-title text-md font-bold">Catatan Upload PHOTO:</div>
+    <div class="collapse-content text-sm">
+      <p># Extensi : .jpg / .png</p>
+      <p># Max Size : 1 MB<br /></p>
     </div>
   </div>
 </template>
