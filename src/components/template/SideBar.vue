@@ -59,7 +59,11 @@ const pagesActiveClass = ref(
                   <div
                     class="w-24 rounded-full border border-sky-200 hover:border-sky-400 shadow hover:shadow-lg"
                   >
-                    <img src="@/assets/img/avatar/user.png" />
+                    <img
+                      v-if="getIdentitas.photo.user"
+                      :src="getIdentitas.photo.user"
+                    />
+                    <img v-else src="@/assets/img/avatar/user.png" />
                   </div>
                 </div>
               </div>

@@ -678,10 +678,6 @@ getDataPhoto();
                         </div>
                         <div class="collapse-content text-sm">
                           <p># Minimal 3 Karakter</p>
-                          <p>
-                            # Password disimpan yang disimpan dalam bentuk Hash
-                            (Sudah terenkripsi)
-                          </p>
                         </div>
                       </div>
                       <button
