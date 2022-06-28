@@ -20,6 +20,7 @@ storeAdminBar.setPagesActive("dashboard");
 
 const getPaket = computed(() => storeGuruBk.getPaket);
 const getStats = computed(() => storeGuruBk.getStats);
+const getIdentitas = computed(() => storeGuruBk.getIdentitas);
 const getSekolah = computed(() => storeGuruBk.getSekolah);
 const data = ref([]);
 const dataDetail = ref({
@@ -261,6 +262,88 @@ const setKecamatan = async (e) => {
 };
 
 getProvinsi();
+
+const photoLogoSekolah = ref(null);
+const photoLogoSekolahFile = ref(null);
+const doUploadLogoSekolah = () => {
+  if (photoLogoSekolahFile.value) {
+    if (
+      photoLogoSekolahFile.value.type == "image/jpeg" ||
+      photoLogoSekolahFile.value.type == "image/png"
+    ) {
+      Toast.babeng("Info", "Fitur belum tersedia!");
+    } else {
+      Toast.danger("Warning", "File harus jpg/png!");
+    }
+  } else {
+    Toast.danger("Info", "Pilih File terlebih dahulu!");
+  }
+};
+const onChangePhotoLogoSekolah = (e) => {
+  let file = e.target.files[0];
+  photoLogoSekolahFile.value = file;
+  photoLogoSekolah.value = URL.createObjectURL(file);
+  console.log(file, photoLogoSekolah.value);
+};
+
+const photoKepalaSekolah = ref(null);
+const photoKepalaSekolahFile = ref(null);
+const doUploadPhotoKepalaSekolah = () => {
+  if (photoKepalaSekolahFile.value) {
+    if (
+      photoKepalaSekolahFile.value.type == "image/jpeg" ||
+      photoKepalaSekolahFile.value.type == "image/png"
+    ) {
+      Toast.babeng("Info", "Fitur belum tersedia!");
+    } else {
+      Toast.danger("Warning", "File harus jpg/png!");
+    }
+  } else {
+    Toast.danger("Info", "Pilih File terlebih dahulu!");
+  }
+};
+const onChangePhotoKepalaSekolah = (e) => {
+  let file = e.target.files[0];
+  photoKepalaSekolahFile.value = file;
+  photoKepalaSekolah.value = URL.createObjectURL(file);
+  console.log(file, photoKepalaSekolah.value);
+};
+
+const photoUser = ref(null);
+const photoUserFile = ref(null);
+const doUploadUser = () => {
+  if (photoUserFile.value) {
+    if (
+      photoUserFile.value.type == "image/jpeg" ||
+      photoUserFile.value.type == "image/png"
+    ) {
+      Toast.babeng("Info", "Fitur belum tersedia!");
+    } else {
+      Toast.danger("Warning", "File harus jpg/png!");
+    }
+  } else {
+    Toast.danger("Info", "Pilih File terlebih dahulu!");
+  }
+};
+const onChangePhotoUser = (e) => {
+  let file = e.target.files[0];
+  photoUserFile.value = file;
+  photoUser.value = URL.createObjectURL(file);
+  console.log(file, photoUser.value);
+};
+
+const getDataPhoto = async () => {
+  try {
+    const response = await Api.get(`gurubk/myprofile/getphoto`);
+    // console.log(response.data);
+    photoLogoSekolah.value = response.data.logo_sekolah;
+    photoKepalaSekolah.value = response.data.photo_kepala_sekolah;
+    photoUser.value = response.data.photo_user;
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
 </script>
 <template>
   <div class="pt-4 px-10 md:flex justify-between">
@@ -277,9 +360,12 @@ getProvinsi();
     </div>
   </div>
 
+  <div class="px-4 pt-10">
+    <h3 class="font-bold">UPDATE DATA SEKOLAH</h3>
+  </div>
   <div class="px-4 py-0">
     <div class="w-full">
-      <div class="bg-base-100 shadow rounded-lg px-0 py-0">
+      <div class="bg-base-100 shadow-lg rounded-lg px-0 py-0">
         <div class="w-full lg:w-fi mx-0">
           <div class="p-2 sm:p-6 xl:p-8">
             <Form v-slot="{ errors }" @submit="onSubmit" v-if="data">
@@ -331,10 +417,7 @@ getProvinsi();
                           class="text-sm font-medium text-base-content block mb-2"
                           >Status</label
                         >
-                        <select
-                          class="select select-bordered w-full max-w-xs"
-                          disabled
-                        >
+                        <select class="select select-bordered w-full" disabled>
                           <!-- <option disabled selected>Pilih Status ?</option> -->
                           <option>Aktif</option>
                           <option>Nonaktif</option>
@@ -408,7 +491,7 @@ getProvinsi();
                         >
 
                         <select
-                          class="select select-bordered w-full max-w-xs"
+                          class="select select-bordered w-full"
                           v-model="dataDetailTemp.provinsi"
                           @change="getKabupaten($event)"
                         >
@@ -435,7 +518,7 @@ getProvinsi();
                         >
 
                         <select
-                          class="select select-bordered w-full max-w-xs"
+                          class="select select-bordered w-full"
                           v-model="dataDetailTemp.kabupaten"
                           @change="getKecamatan($event)"
                         >
@@ -463,7 +546,7 @@ getProvinsi();
                         >
 
                         <select
-                          class="select select-bordered w-full max-w-xs"
+                          class="select select-bordered w-full"
                           v-model="dataDetailTemp.kecamatan"
                           @change="setKecamatan($event)"
                         >
@@ -498,7 +581,10 @@ getProvinsi();
     </div>
   </div>
 
-  <div class="px-4 py-0">
+  <div class="px-4 py-10">
+    <h3 class="font-bold">UPDATE PASSWORD</h3>
+  </div>
+  <div class="px-4 py-0 shadow-lg">
     <div class="w-full">
       <div class="bg-base-100 shadow rounded-lg px-0 py-0">
         <div class="w-full lg:w-fi mx-0">
@@ -550,7 +636,22 @@ getProvinsi();
                       </div>
                     </div>
 
-                    <div class="w-full flex justify-end mt-4 px-20">
+                    <div class="w-full flex justify-end mt-4 px-20 gap-4">
+                      <div
+                        class="collapse collapse-arrow shadow-sm border border-spacing-1"
+                      >
+                        <input type="checkbox" />
+                        <div class="collapse-title text-md font-bold">
+                          Catatan :
+                        </div>
+                        <div class="collapse-content text-sm">
+                          <p># Minimal 3 Karakter</p>
+                          <p>
+                            # Password disimpan yang disimpan dalam bentuk Hash
+                            (Sudah terenkripsi)
+                          </p>
+                        </div>
+                      </div>
                       <button
                         class="btn btn-lg btn-primary"
                         v-if="isPasswordSama"
@@ -570,6 +671,118 @@ getProvinsi();
               </div>
             </Form>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="px-4 py-4">
+    <h3 class="font-bold">UPDATE PHOTO</h3>
+  </div>
+  <div class="w-full flex justify-center flex-wrap">
+    <div
+      class="xl:flex felx-wrap gap-10 xl:w-full px-4 justify-center space-y-4"
+    >
+      <div class="card xl:w-2/5 bg-base-100 shadow-xl">
+        <div class="w-full flex justify-center">
+          <div class="avatar">
+            <div class="w-52 mask mask-squircle">
+              <img v-if="photoLogoSekolah" :src="photoLogoSekolah" />
+              <img v-else src="@/assets/img/logo/github-copilot.svg" />
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body items-center text-center">
+          <h2 class="card-title">{{ getSekolah.nama }}</h2>
+          <p>SEKOLAH</p>
+          <div class="card-actions">
+            <!-- <button class="btn btn-primary">Update Logo Sekolah</button> -->
+          </div>
+        </div>
+        <div class="px-10 pt-2">
+          <p class="text-sm font-bold">Pilih Logo Sekolah :</p>
+          <input
+            type="file"
+            name="photoLogoSekolah"
+            @change="onChangePhotoLogoSekolah($event)"
+            class="input md:w-full max-w-2xl"
+            required
+          />
+        </div>
+        <div class="flex justify-end px-10 pb-4">
+          <button class="btn btn-lg btn-primary" @click="doUploadLogoSekolah()">
+            UPLOAD
+          </button>
+        </div>
+      </div>
+
+      <div class="card xl:w-2/5 bg-base-100 shadow-xl">
+        <div class="w-full flex justify-center">
+          <div class="avatar">
+            <div class="w-52 mask mask-squircle">
+              <img v-if="photoKepalaSekolah" :src="photoKepalaSekolah" />
+              <img v-else src="@/assets/img/avatar/user.png" />
+            </div>
+          </div>
+        </div>
+        <div class="card-body items-center text-center">
+          <h2 class="card-title">{{ getSekolah.kepsek_nama }}</h2>
+          <p>KEPALA SEKOLAH</p>
+          <div class="card-actions">
+            <!-- <button class="btn btn-primary">Update Photo Kepala Sekolah</button> -->
+          </div>
+        </div>
+        <div class="px-10 pt-2">
+          <p class="text-sm font-bold">Pilih Photo Kepala Sekolah :</p>
+          <input
+            type="file"
+            name="photoKepalaSekolah"
+            @change="onChangePhotoKepalaSekolah($event)"
+            class="input md:w-full max-w-2xl"
+            required
+          />
+        </div>
+        <div class="flex justify-end px-10 pb-4">
+          <button
+            class="btn btn-lg btn-primary"
+            @click="doUploadPhotoKepalaSekolah()"
+          >
+            UPLOAD
+          </button>
+        </div>
+      </div>
+
+      <div class="card xl:w-2/5 bg-base-100 shadow-xl">
+        <div class="w-full flex justify-center">
+          <div class="avatar">
+            <div class="w-52 mask mask-squircle">
+              <img v-if="photoUser" :src="photoUser" />
+              <img v-else src="@/assets/img/avatar/user.png" />
+            </div>
+          </div>
+        </div>
+        <div class="card-body items-center text-center">
+          <h2 class="card-title">{{ getIdentitas.nama }}</h2>
+          <p>USER</p>
+          <div class="card-actions">
+            <!-- <button class="btn btn-primary">Update Photo Kepala Sekolah</button> -->
+          </div>
+        </div>
+        <div class="px-10 pt-2">
+          <p class="text-sm font-bold">Pilih Photo User :</p>
+          <input
+            type="file"
+            name="photoUser"
+            @change="onChangePhotoUser($event)"
+            class="input md:w-full max-w-2xl"
+            required
+          />
+        </div>
+        <div class="flex justify-end px-10 pb-4">
+          <button class="btn btn-lg btn-primary" @click="doUploadUser()">
+            UPLOAD
+          </button>
         </div>
       </div>
     </div>

@@ -353,7 +353,7 @@ const doStoreData = async (d) => {
     </div>
   </div> -->
 
-  <div class="px-4 py-4">
+  <!-- <div class="px-4 py-4">
     <h3 class="font-bold">Update Photo</h3>
   </div>
   <div class="lg:flex felx-wrap gap-2 w-full px-4">
@@ -390,5 +390,5 @@ const doStoreData = async (d) => {
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
