@@ -262,21 +262,30 @@ const setKecamatan = async (e) => {
 };
 
 getProvinsi();
+// Validasi Submit Photo
+const fnValidateFile = (file) => {
+  if (file) {
+    if (file.size > 1048576) {
+      Toast.danger("Warning", "File harus kurang dari 1mb!");
+      return false;
+    }
+    if (file.type != "image/jpeg" && file.type != "image/png") {
+      Toast.danger("Warning", "File harus jpg/png!");
+      return false;
+    }
+
+    return true;
+  } else {
+    Toast.danger("Info", "Pilih File terlebih dahulu!");
+    return false;
+  }
+};
 
 const photoLogoSekolah = ref(null);
 const photoLogoSekolahFile = ref(null);
 const doUploadLogoSekolah = () => {
-  if (photoLogoSekolahFile.value) {
-    if (
-      photoLogoSekolahFile.value.type == "image/jpeg" ||
-      photoLogoSekolahFile.value.type == "image/png"
-    ) {
-      Toast.babeng("Info", "Fitur belum tersedia!");
-    } else {
-      Toast.danger("Warning", "File harus jpg/png!");
-    }
-  } else {
-    Toast.danger("Info", "Pilih File terlebih dahulu!");
+  if (fnValidateFile(photoLogoSekolahFile.value)) {
+    Toast.babeng("Info", "Fitur belum tersedia!");
   }
 };
 const onChangePhotoLogoSekolah = (e) => {
@@ -289,17 +298,8 @@ const onChangePhotoLogoSekolah = (e) => {
 const photoKepalaSekolah = ref(null);
 const photoKepalaSekolahFile = ref(null);
 const doUploadPhotoKepalaSekolah = () => {
-  if (photoKepalaSekolahFile.value) {
-    if (
-      photoKepalaSekolahFile.value.type == "image/jpeg" ||
-      photoKepalaSekolahFile.value.type == "image/png"
-    ) {
-      Toast.babeng("Info", "Fitur belum tersedia!");
-    } else {
-      Toast.danger("Warning", "File harus jpg/png!");
-    }
-  } else {
-    Toast.danger("Info", "Pilih File terlebih dahulu!");
+  if (fnValidateFile(photoKepalaSekolahFile.value)) {
+    Toast.babeng("Info", "Fitur belum tersedia!");
   }
 };
 const onChangePhotoKepalaSekolah = (e) => {
@@ -312,17 +312,8 @@ const onChangePhotoKepalaSekolah = (e) => {
 const photoUser = ref(null);
 const photoUserFile = ref(null);
 const doUploadUser = () => {
-  if (photoUserFile.value) {
-    if (
-      photoUserFile.value.type == "image/jpeg" ||
-      photoUserFile.value.type == "image/png"
-    ) {
-      Toast.babeng("Info", "Fitur belum tersedia!");
-    } else {
-      Toast.danger("Warning", "File harus jpg/png!");
-    }
-  } else {
-    Toast.danger("Info", "Pilih File terlebih dahulu!");
+  if (fnValidateFile(photoUserFile.value)) {
+    Toast.babeng("Info", "Fitur belum tersedia!");
   }
 };
 const onChangePhotoUser = (e) => {
