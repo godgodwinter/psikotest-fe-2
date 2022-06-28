@@ -16,7 +16,7 @@ const route = useRoute();
 moment.updateLocale("id", localization);
 const storeGuruBk = useStoreGuruBk();
 const storeAdminBar = useStoreAdminBar();
-storeAdminBar.setPagesActive("dashboard");
+storeAdminBar.setPagesActive("profile");
 
 const getPaket = computed(() => storeGuruBk.getPaket);
 const getStats = computed(() => storeGuruBk.getStats);
