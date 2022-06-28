@@ -685,13 +685,27 @@ const getDataPhoto = async () => {
     >
       <div class="card xl:w-2/5 bg-base-100 shadow-xl">
         <div class="w-full flex justify-center">
-          <div class="avatar">
+          <label
+            class="avatar hover:scale-110 transition-all duration-500"
+            for="my-modal-1"
+          >
             <div class="w-52 mask mask-squircle">
               <img v-if="photoLogoSekolah" :src="photoLogoSekolah" />
               <img v-else src="@/assets/img/logo/github-copilot.svg" />
             </div>
-          </div>
+          </label>
         </div>
+
+        <!-- modal -->
+        <input type="checkbox" id="my-modal-1" class="modal-toggle" />
+        <label for="my-modal-1" class="modal cursor-pointer">
+          <label class="modal-box relative" for="">
+            <img v-if="photoLogoSekolah" :src="photoLogoSekolah" />
+            <img v-else src="@/assets/img/logo/github-copilot.svg" />
+          </label>
+        </label>
+
+        <!-- modal -->
 
         <div class="card-body items-center text-center">
           <h2 class="card-title">{{ getSekolah.nama }}</h2>
@@ -719,12 +733,26 @@ const getDataPhoto = async () => {
 
       <div class="card xl:w-2/5 bg-base-100 shadow-xl">
         <div class="w-full flex justify-center">
-          <div class="avatar">
+          <label
+            class="avatar hover:scale-110 transition-all duration-500"
+            for="my-modal-2"
+          >
             <div class="w-52 mask mask-squircle">
               <img v-if="photoKepalaSekolah" :src="photoKepalaSekolah" />
               <img v-else src="@/assets/img/avatar/user.png" />
             </div>
-          </div>
+          </label>
+
+          <!-- modal -->
+          <input type="checkbox" id="my-modal-2" class="modal-toggle" />
+          <label for="my-modal-2" class="modal cursor-pointer">
+            <label class="modal-box relative" for="">
+              <img v-if="photoKepalaSekolah" :src="photoKepalaSekolah" />
+              <img v-else src="@/assets/img/avatar/user.png" />
+            </label>
+          </label>
+
+          <!-- modal -->
         </div>
         <div class="card-body items-center text-center">
           <h2 class="card-title">{{ getSekolah.kepsek_nama }}</h2>
@@ -755,13 +783,27 @@ const getDataPhoto = async () => {
 
       <div class="card xl:w-2/5 bg-base-100 shadow-xl">
         <div class="w-full flex justify-center">
-          <div class="avatar">
+          <label
+            class="avatar hover:scale-110 transition-all duration-500"
+            for="my-modal-3"
+          >
             <div class="w-52 mask mask-squircle">
               <img v-if="photoUser" :src="photoUser" />
               <img v-else src="@/assets/img/avatar/user.png" />
             </div>
-          </div>
+          </label>
         </div>
+
+        <!-- modal -->
+        <input type="checkbox" id="my-modal-3" class="modal-toggle" />
+        <label for="my-modal-3" class="modal cursor-pointer">
+          <label class="modal-box relative" for="">
+            <img v-if="photoUser" :src="photoUser" />
+            <img v-else src="@/assets/img/avatar/user.png" />
+          </label>
+        </label>
+
+        <!-- modal -->
         <div class="card-body items-center text-center">
           <h2 class="card-title">{{ getIdentitas.nama }}</h2>
           <p>USER</p>
