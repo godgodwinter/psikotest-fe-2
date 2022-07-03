@@ -37,11 +37,11 @@ const columns = [
     field: "nama",
     type: "String",
   },
-  {
-    label: "Tipe",
-    field: "tipe",
-    type: "String",
-  },
+  // {
+  //   label: "Tipe",
+  //   field: "tipe",
+  //   type: "String",
+  // },
   {
     label: "File",
     field: "file",
