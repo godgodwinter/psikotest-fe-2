@@ -58,9 +58,9 @@ const columns = ref([
     type: "String",
   },
   {
-    label: "Kecerdasan Bahasa/Lingustik",
-    field: "kb_persen",
-    type: "String",
+    label: "Intelligence Quotient",
+    field: "iq",
+    type: "number",
   },
 ]);
 
@@ -214,10 +214,65 @@ const doPilihKelas = () => {
 
 // seleksi yang ditampilkan
 const ListTampilkan = ref([
+  { label: "Intelligence Quotient", id: "iq", checked: true, type: "number" },
+  {
+    label: "Prosentase Gaya Belajar Auditif",
+    id: "prosentase_auditif",
+    checked: false,
+    type: "number",
+  },
+  {
+    label: "Prosentase Gaya Belajar Visual",
+    id: "prosentase_visual",
+    checked: false,
+    type: "number",
+  },
+  {
+    label: "Prosentase Gaya Belajar Kinestetik",
+    id: "prosentase_kinestetik",
+    checked: false,
+    type: "number",
+  },
+  {
+    label: "Keterangan Gaya Belajar Auditif",
+    id: "keterangan_auditif",
+    checked: false,
+    type: "number",
+  },
+  {
+    label: "Keterangan Gaya Belajar Visual",
+    id: "keterangan_visual",
+    checked: false,
+    type: "number",
+  },
+  {
+    label: "Keterangan Gaya Belajar Kinestetik",
+    id: "keterangan_kinestetik",
+    checked: false,
+    type: "number",
+  },
+  {
+    label: "Rank Gaya Belajar Auditif",
+    id: "rank_auditif",
+    checked: false,
+    type: "number",
+  },
+  {
+    label: "Rank Gaya Belajar Visual",
+    id: "rank_visual",
+    checked: false,
+    type: "number",
+  },
+  {
+    label: "Rank Gaya Belajar Kinestetik",
+    id: "rank_kinestetik",
+    checked: false,
+    type: "number",
+  },
   {
     label: "Kecerdasan Bahasa/Lingustik",
     id: "kb_persen",
-    checked: true,
+    checked: false,
     type: "number",
   },
   {
@@ -274,7 +329,6 @@ const ListTampilkan = ref([
     type: "number",
   },
   { label: "Keterangan Kecerdasan Natural", id: "knh", checked: false },
-  { label: "Intelligence Quotient", id: "iq", checked: false, type: "number" },
   {
     label: "Persentase Intelligence Quotient",
     id: "iq_persen",
@@ -768,7 +822,10 @@ watch(ListTampilkan.value, (newValue, oldValue) => {
     </div>
     <div class="w-full md:w-1/2 flex justify-end"></div>
   </div>
-  <div class="w-full bg-white shadow shadow-md py-4 px-4">
+
+  <div
+    class="w-full lg:w-10/12 2xl:w-10/12 bg-base-200 shadow shadow-md py-4 px-4"
+  >
     <div class="flex justify-center gap-2 w-full flex-wrap">
       <div class="collapse">
         <input type="checkbox" />
@@ -778,7 +835,9 @@ watch(ListTampilkan.value, (newValue, oldValue) => {
           List Pilihan Data
         </div>
         <div class="collapse-content">
-          <div class="flex justify-center gap-2 w-full flex-wrap py-2">
+          <div
+            class="flex justify-center gap-2 w-full lg:w-10/12 2xl:w-full flex-wrap py-2"
+          >
             <div v-for="(item, index) in ListTampilkan">
               <div class="form-control">
                 <label
@@ -800,8 +859,8 @@ watch(ListTampilkan.value, (newValue, oldValue) => {
     </div>
   </div>
 
-  <div class="md:py-0 px-4 lg:flex flex-wrap gap-4">
-    <div class="w-full lg:w-full">
+  <div class="md:py-2 px-4 lg:flex flex-wrap gap-4">
+    <div class="w-full lg:w-10/12 2xl:w-10/12">
       <div class="shadow rounded-lg px-4 py-4">
         <div v-if="data">
           <vue-good-table
