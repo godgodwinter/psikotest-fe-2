@@ -115,7 +115,7 @@ getData();
     </div>
   </div>
 
-  <div class="w-full lg:w-full">
+  <div class="w-full lg:w-full" v-if="data.tipe != 'Upload'">
     <div class="bg-white shadow rounded-lg px-4 py-2">
       <div class="overflow-x-auto px-4 space-y-10 py-2">
         <div class="space-y-2">
@@ -124,13 +124,16 @@ getData();
           </h1>
 
           <div class="space-y-2 border-b-2 py-2">
-            <p class="indent-8 text-gray-700">{{ data.link }}</p>
+            <!-- <p class="indent-8 text-gray-700">{{ data.link }}</p> -->
+            <a :href="data.link" target="_blank" rel="noopener noreferrer">
+              <button class="btn btn-primary">Download</button>
+            </a>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="w-full lg:w-full">
+  <div class="w-full lg:w-full" v-else>
     <div class="bg-white shadow rounded-lg px-4 py-2">
       <div class="overflow-x-auto px-4 space-y-10 py-2">
         <div class="space-y-2">
@@ -139,7 +142,14 @@ getData();
           </h1>
 
           <div class="space-y-2 border-b-2 py-2">
-            <p class="indent-8 text-gray-700">{{ data.file }}</p>
+            <!-- <p class="indent-8 text-gray-700">{{ data.file }}</p> -->
+            <a
+              :href="BASE_URL + data.file"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button class="btn btn-primary">Download</button>
+            </a>
           </div>
         </div>
       </div>

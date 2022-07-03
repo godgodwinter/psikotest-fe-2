@@ -25,13 +25,6 @@ const data = ref([]);
 
 const columns = [
   {
-    label: "No",
-    field: "no",
-    width: "50px",
-    tdClass: "text-center",
-    thClass: "text-center",
-  },
-  {
     label: "Actions",
     field: "actions",
     sortable: false,
@@ -120,6 +113,7 @@ getData();
       <div class="bg-white shadow rounded-lg px-4 py-4">
         <div v-if="data">
           <vue-good-table
+            :line-numbers="true"
             :columns="columns"
             :rows="data"
             :search-options="{
@@ -167,6 +161,26 @@ getData();
 
               <span v-else-if="props.column.field == 'no'">
                 <div class="text-center">{{ props.index + 1 }}</div>
+              </span>
+              <span v-else-if="props.column.field == 'file'">
+                <div class="text-left" v-if="props.row.tipe != 'Upload'">
+                  <a
+                    :href="props.row.link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <button class="btn btn-primary">Download</button>
+                  </a>
+                </div>
+                <div v-else>
+                  <a
+                    :href="BASE_URL + props.row.file"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <button class="btn btn-primary">Download</button>
+                  </a>
+                </div>
               </span>
 
               <span v-else>
