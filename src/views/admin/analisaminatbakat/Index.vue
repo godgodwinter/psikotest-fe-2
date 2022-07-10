@@ -319,7 +319,9 @@ watch(ListTampilkan.value, (newValue, oldValue) => {
     </div>
     <div class="w-full md:w-1/2 flex justify-end"></div>
   </div>
-  <div class="w-full bg-white shadow shadow-md py-4 px-4">
+  <div
+    class="w-full lg:w-10/12 2xl:w-10/12 bg-base-200 shadow shadow-md py-4 px-4"
+  >
     <div class="flex justify-center gap-2 w-full flex-wrap">
       <div class="collapse">
         <input type="checkbox" />
