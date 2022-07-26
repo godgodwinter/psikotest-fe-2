@@ -240,6 +240,31 @@ const pagesActiveClass = ref(
                 <span class="ml-3">Wali Kelas </span>
               </router-link>
             </li>
+            <li
+              class="lg:w-full py-0"
+              :class="[pagesActive == 'bk' ? pagesActiveClass : '']"
+            >
+              <router-link
+                :to="{ name: 'AdminBk' }"
+                class="text-base-content font-normal rounded-lg flex items-center p-2 group hover:link"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  />
+                </svg>
+                <span class="ml-3">Guru BK </span>
+              </router-link>
+            </li>
             <!-- <li
               class="lg:w-full py-0"
               :class="[pagesActive == 'pengguna' ? pagesActiveClass : '']"

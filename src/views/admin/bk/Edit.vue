@@ -9,9 +9,9 @@ import { useStoreAdminBar } from "@/stores/adminBar";
 import { useRouter, useRoute } from "vue-router";
 import Toast from "@/components/lib/Toast.js";
 const storeAdminBar = useStoreAdminBar();
-storeAdminBar.setPagesActive("walikelas");
+storeAdminBar.setPagesActive("bk");
 
-let pilihWaliKelas = ref([]);
+let pilihBk = ref([]);
 
 const router = useRouter();
 const route = useRoute();
@@ -28,7 +28,7 @@ const inputCariKelas = ref({
 
 const getDataId = async () => {
   try {
-    const response = await Api.get(`gurubk/walikelas/${route.params.id}`);
+    const response = await Api.get(`gurubk/bk/${route.params.id}`);
     dataAsli.value = response.data;
     dataDetail.value = {
       nama: response.data.nama,
@@ -62,10 +62,10 @@ const doStoreData = async (d) => {
     nomerinduk: dataDetail.value.nomerinduk,
   };
   try {
-    const response = await Api.put(`gurubk/walikelas/${id}`, dataStore);
+    const response = await Api.put(`gurubk/bk/${id}`, dataStore);
     Toast.success("Success", "Data Berhasil update!");
     // resetForm();
-    router.push({ name: "AdminWaliKelas" });
+    router.push({ name: "AdminBk" });
 
     return response.data;
   } catch (error) {
@@ -85,7 +85,7 @@ const doStoreData = async (d) => {
     </div>
     <div class="md:py-0 py-4">
       <BreadCrumb>
-        <template v-slot:content> WaliKelas <BreadCrumbSpace /> Edit </template>
+        <template v-slot:content> Bk <BreadCrumbSpace /> Edit </template>
       </BreadCrumb>
     </div>
   </div>
@@ -93,7 +93,7 @@ const doStoreData = async (d) => {
   <div class="pt-4 px-10 md:flex justify-between">
     <div></div>
     <div class="md:py-0 py-4 space-x-2 space-y-2">
-      <router-link :to="{ name: 'AdminWaliKelas' }">
+      <router-link :to="{ name: 'AdminBk' }">
         <button
           class="btn hover:shadow-lg shadow text-white hover:text-gray-100 gap-2"
         >
