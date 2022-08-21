@@ -58,13 +58,17 @@ const inputCariKelas = ref();
 
 const doPilihKelas = () => {
   // console.log(inputCariKelas.value.id);
-  router.push({
-    name: "AdminSiswa",
-    params: {
-      kelas_id: inputCariKelas.value.id,
-    },
-  });
-  getData(inputCariKelas.value.id);
+  if (inputCariKelas.value) {
+    router.push({
+      name: "AdminSiswa",
+      params: {
+        kelas_id: inputCariKelas.value.id,
+      },
+    });
+    getData(inputCariKelas.value.id);
+  } else {
+    Toast.danger("Warning", "Pilih Kelas Terlebih Dahulu");
+  }
 };
 
 

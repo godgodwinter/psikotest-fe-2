@@ -95,7 +95,7 @@ const routes = [
         component: () => import("@/views/admin/settings/MyProfile.vue"),
       },
       {
-        path: "/pages/siswa/:id?",
+        path: "/pages/siswa/:kelas_id?",
         name: "AdminSiswa",
         component: () => import("@/views/admin/siswa/Index.vue"),
       },
@@ -160,7 +160,7 @@ const routes = [
         component: AdminPenggunaEdit,
       },
       {
-        path: "/pages/hasilpsikologi",
+        path: "/pages/hasilpsikologi/:kelas_id?",
         name: "AdminHasilPsikologi",
         component: AdminHasilPsikologi,
       },
@@ -191,14 +191,14 @@ const routes = [
         component: AdminHasilPsikologiTerapis,
       },
       {
-        path: "/pages/nilaipsikologi",
+        path: "/pages/nilaipsikologi/:kelas_id?",
         name: "AdminNilaiPsikologi",
         component: AdminNilaiPsikologi,
       },
       {
-        path: "/pages/analisaminatbakat",
+        path: "/pages/dataanalisaminatbakat/:kelas_id?",
         name: "AdminAnalisaMinatBakat",
-        component: AdminAnalisaMinatBakat,
+        component: () => import("@/views/admin/analisaminatbakat/Index.vue"),
       },
       {
         path: "/pages/analisaminatbakat/:id",
@@ -206,7 +206,7 @@ const routes = [
         component: () => import("@/views/admin/analisaminatbakat/Tambah.vue"),
       },
       {
-        path: "/pages/analisanpenjurusan",
+        path: "/pages/dataanalisanpenjurusan/:kelas_id?",
         name: "AdminAnalisaPenjurusan",
         component: AdminAnalisaPenjurusan,
       },
