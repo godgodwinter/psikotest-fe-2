@@ -1,5 +1,7 @@
 <script setup>
-const BASE_URL = import.meta.env.VITE_API_URL;
+const BASE_URL = import.meta.env.VITE_API_URL
+  ? import.meta.env.VITE_API_URL
+  : "http://localhost:8000/";
 import Api from "@/axios/axios";
 import { ref, watch, computed } from "vue";
 import BreadCrumb from "@/components/atoms/BreadCrumb.vue";
@@ -81,7 +83,7 @@ const getData = async (kelas_id) => {
     linkExport.value =
       BASE_URL +
       "api/admin/proses/export/datasiswa/" +
-      sekolah.id +
+      sekolah.value.id +
       "/kelas/" +
       kelas_id +
       "/get?listdata=" +
@@ -118,11 +120,11 @@ const getData = async (kelas_id) => {
 };
 
 
-const listData = ref("kb_persen");
+const listData = ref("tipe_bakat_1");
 const linkExport = ref(
   BASE_URL +
   "api/admin/proses/export/datasiswa/" +
-  sekolah.id +
+  sekolah.value.id +
   "/kelas/" +
   kelas_id.value +
   "/get?listdata=" +
@@ -292,7 +294,7 @@ watch(ListTampilkan.value, (newValue, oldValue) => {
   });
   linkExport.value = BASE_URL +
     "api/admin/proses/export/datasiswa/" +
-    sekolah.id +
+    sekolah.value.id +
     "/kelas/" +
     kelas_id.value +
     "/get?listdata=" +
