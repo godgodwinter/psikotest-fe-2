@@ -11,7 +11,6 @@ import LandingLogin from "../views/landing/LandingLogin.vue";
 
 // admin
 import DashBoard from "../views/admin/DashBoard.vue";
-import AdminSiswa from "../views/admin/siswa/Index.vue";
 import AdminSiswaEdit from "../views/admin/siswa/Edit.vue";
 import AdminKelas from "../views/admin/kelas/Index.vue";
 import AdminKelasEdit from "../views/admin/kelas/Edit.vue";
@@ -96,9 +95,9 @@ const routes = [
         component: () => import("@/views/admin/settings/MyProfile.vue"),
       },
       {
-        path: "/pages/siswa",
+        path: "/pages/siswa/:id?",
         name: "AdminSiswa",
-        component: AdminSiswa,
+        component: () => import("@/views/admin/siswa/Index.vue"),
       },
       {
         path: "/pages/siswa/:id",
