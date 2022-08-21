@@ -162,7 +162,8 @@ const routes = [
       {
         path: "/pages/hasilpsikologi/:kelas_id?",
         name: "AdminHasilPsikologi",
-        component: AdminHasilPsikologi,
+        component: () =>
+          import("@/views/admin/hasilpsikologi/Index.vue"),
       },
       {
         path: "/pages/hasilpsikologi/deteksi/:id",
