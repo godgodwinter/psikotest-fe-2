@@ -11,7 +11,6 @@ import LandingLogin from "../views/landing/LandingLogin.vue";
 
 // admin
 import DashBoard from "../views/admin/DashBoard.vue";
-import AdminSiswa from "../views/admin/siswa/Index.vue";
 import AdminSiswaEdit from "../views/admin/siswa/Edit.vue";
 import AdminKelas from "../views/admin/kelas/Index.vue";
 import AdminKelasEdit from "../views/admin/kelas/Edit.vue";
@@ -96,9 +95,9 @@ const routes = [
         component: () => import("@/views/admin/settings/MyProfile.vue"),
       },
       {
-        path: "/pages/siswa",
+        path: "/pages/siswa/:kelas_id?",
         name: "AdminSiswa",
-        component: AdminSiswa,
+        component: () => import("@/views/admin/siswa/Index.vue"),
       },
       {
         path: "/pages/siswa/:id",
@@ -161,9 +160,10 @@ const routes = [
         component: AdminPenggunaEdit,
       },
       {
-        path: "/pages/hasilpsikologi",
+        path: "/pages/hasilpsikologi/:kelas_id?",
         name: "AdminHasilPsikologi",
-        component: AdminHasilPsikologi,
+        component: () =>
+          import("@/views/admin/hasilpsikologi/Index.vue"),
       },
       {
         path: "/pages/hasilpsikologi/deteksi/:id",
@@ -192,14 +192,14 @@ const routes = [
         component: AdminHasilPsikologiTerapis,
       },
       {
-        path: "/pages/nilaipsikologi",
+        path: "/pages/nilaipsikologi/:kelas_id?",
         name: "AdminNilaiPsikologi",
         component: AdminNilaiPsikologi,
       },
       {
-        path: "/pages/analisaminatbakat",
+        path: "/pages/dataanalisaminatbakat/:kelas_id?",
         name: "AdminAnalisaMinatBakat",
-        component: AdminAnalisaMinatBakat,
+        component: () => import("@/views/admin/analisaminatbakat/Index.vue"),
       },
       {
         path: "/pages/analisaminatbakat/:id",
@@ -207,7 +207,7 @@ const routes = [
         component: () => import("@/views/admin/analisaminatbakat/Tambah.vue"),
       },
       {
-        path: "/pages/analisanpenjurusan",
+        path: "/pages/dataanalisanpenjurusan/:kelas_id?",
         name: "AdminAnalisaPenjurusan",
         component: AdminAnalisaPenjurusan,
       },
