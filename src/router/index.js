@@ -100,7 +100,7 @@ const routes = [
         component: () => import("@/views/admin/siswa/Index.vue"),
       },
       {
-        path: "/pages/siswa/:id",
+        path: "/pages/siswa/:id/edit",
         name: "AdminSiswaEdit",
         component: AdminSiswaEdit,
       },

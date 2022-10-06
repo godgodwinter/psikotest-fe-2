@@ -28,6 +28,7 @@ const dataAsli = ref([]);
 const data = ref([]);
 const dataKelas = ref([]);
 let pilihKelas = ref([]);
+const sekolah_id = storeGuruBk.getIdentitas ? storeGuruBk.getIdentitas.sekolah_id : null;
 
 
 const inputCariKelas = ref();
@@ -69,6 +70,7 @@ const doPilihKelas = () => {
         kelas_id: inputCariKelas.value.id,
       },
     });
+    fnSetToTempSekolah(sekolah_id, inputCariKelas.value.id, inputCariKelas.value.label);
     getData(inputCariKelas.value.id);
   } else {
     Toast.danger("Warning", "Pilih Kelas Terlebih Dahulu");
@@ -712,11 +714,57 @@ watch(ListTampilkan.value, (newValue, oldValue) => {
     listData.value;
   console.log(BASE_URL, linkExport.value);
 });
+const getTempSekolah = computed(() => storeGuruBk.getTempSekolah);
+
+const fnCariDataTempSekolahWhereSekolahId = (id) => {
+  let tempSekolah = storeGuruBk.getTempSekolah;
+  console.log(id, tempSekolah);
+  return tempSekolah ? tempSekolah.filter((item) => item.id == id) : [];
+}
+
+const getDataSekolah = fnCariDataTempSekolahWhereSekolahId(sekolah_id);
+// console.log('====================================');
+// console.log(sekolah_id);
+// console.log('====================================');
+
+const fnSetToTempSekolah = (sekolah_id, kelas_id, nama_kelas) => {
+  let obj = {
+    id: sekolah_id,
+    kelas_id: kelas_id,
+    nama_kelas: nama_kelas,
+  }
+  // console.log("objek", obj);
+  let temp = getTempSekolah.value;
+  console.log("temp", temp);
+  if (temp.length > 0) {
+    let periksa = temp.filter((x) => x.id == obj.id);
+    console.log("periksa:", periksa)
+    if (periksa.length > 0) {
+      temp.forEach((x, index) => {
+        if (x.id == obj.id) {
+          x.kelas_id = obj.kelas_id,
+            x.nama_kelas = obj.nama_kelas
+        }
+      })
+    } else {
+      temp.push(obj);
+    }
+  } else {
+    temp.push(obj);
+  }
+  // console.log(temp);
+  // console.log(getTempSekolah);
+  storeGuruBk.setTempSekolah(temp)
+}
 </script>
 <template>
   <div class="pt-4 px-10 md:flex justify-between">
     <div>
-      <span class="text-2xl sm:text-3xl leading-none font-bold text-base-content shadow-sm">Nilai Psikologi Siswa</span>
+      <span class="text-2xl sm:text-3xl leading-none font-bold text-base-content shadow-sm">Nilai Psikologi Siswa kelas
+        <!-- {{getDataSekolah }} -->
+        {{
+        getDataSekolah.length>0?getDataSekolah[0].nama_kelas:null }}
+      </span>
     </div>
     <div class="md:py-0 py-4">
       <BreadCrumb>
@@ -781,9 +829,9 @@ watch(ListTampilkan.value, (newValue, oldValue) => {
           <vue-good-table :columns="columns" :rows="data" :search-options="{
             enabled: true,
           }" :pagination-options="{
-  enabled: true,
-  perPageDropdown: [10, 20, 50],
-}" styleClass="vgt-table striped bordered condensed" class="py-0">
+            enabled: true,
+            perPageDropdown: [10, 20, 50],
+          }" styleClass="vgt-table striped bordered condensed" class="py-0">
             <template #table-row="props">
               <span v-if="props.column.field == 'no'">
                 <div class="text-center">{{ props.index + 1 }}</div>

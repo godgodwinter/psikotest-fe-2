@@ -4,15 +4,24 @@ import localization from "moment/locale/id";
 moment.updateLocale("id", localization);
 const BASE_URL = import.meta.env.VITE_API_URL;
 import Api from "@/axios/axios";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import BreadCrumb from "@/components/atoms/BreadCrumb.vue";
 import BreadCrumbSpace from "@/components/atoms/BreadCrumbSpace.vue";
 import ButtonEdit from "@/components/atoms/ButtonEdit.vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStoreAdminBar } from "@/stores/adminBar";
+import { useStoreGuruBk } from "@/stores/guruBk";
 import Toast from "@/components/lib/Toast.js";
 
 const storeAdminBar = useStoreAdminBar();
+const storeGuruBk = useStoreGuruBk();
+// storeGuruBk.$subscribe((mutation, state) => {
+//   // console.log(sekolah.value.id);
+
+//   // let getDataSekolahSub = fnCariDataTempSekolahWhereSekolahId(id);
+//   // kelas_id.value = getDataSekolahSub.length > 0 ? getDataSekolahSub[0].kelas_id : null;
+//   getDataSekolah.value = fnCariDataTempSekolahWhereSekolahId(sekolah_id);
+// });
 storeAdminBar.setPagesActive("siswa");
 const router = useRouter();
 const route = useRoute();
@@ -24,6 +33,7 @@ let pilihKelas = ref([]);
 const dataAsli = ref([]);
 const dataKelas = ref([]);
 const data = ref([]);
+const sekolah_id = storeGuruBk.getIdentitas ? storeGuruBk.getIdentitas.sekolah_id : null;
 
 
 // get Kelas
@@ -65,6 +75,10 @@ const doPilihKelas = () => {
         kelas_id: inputCariKelas.value.id,
       },
     });
+    // console.log('====================================');
+    // console.log(sekolah_id, inputCariKelas.value.id, inputCariKelas.value.label);
+    // console.log('====================================');
+    fnSetToTempSekolah(sekolah_id, inputCariKelas.value.id, inputCariKelas.value.label);
     getData(inputCariKelas.value.id);
   } else {
     Toast.danger("Warning", "Pilih Kelas Terlebih Dahulu");
@@ -166,15 +180,65 @@ const doCopyClipboard = (item) => {
 //   //   );
 //   // }
 // };
+
+
+const getTempSekolah = computed(() => storeGuruBk.getTempSekolah);
+
+const fnCariDataTempSekolahWhereSekolahId = (id) => {
+  let tempSekolah = storeGuruBk.getTempSekolah;
+  console.log(id, tempSekolah);
+  return tempSekolah ? tempSekolah.filter((item) => item.id == id) : [];
+}
+
+const getDataSekolah = fnCariDataTempSekolahWhereSekolahId(sekolah_id);
+// console.log('====================================');
+// console.log(sekolah_id);
+// console.log('====================================');
+
+const fnSetToTempSekolah = (sekolah_id, kelas_id, nama_kelas) => {
+  let obj = {
+    id: sekolah_id,
+    kelas_id: kelas_id,
+    nama_kelas: nama_kelas,
+  }
+  // console.log("objek", obj);
+  let temp = getTempSekolah.value;
+  console.log("temp", temp);
+  if (temp.length > 0) {
+    let periksa = temp.filter((x) => x.id == obj.id);
+    console.log("periksa:", periksa)
+    if (periksa.length > 0) {
+      temp.forEach((x, index) => {
+        if (x.id == obj.id) {
+          x.kelas_id = obj.kelas_id,
+            x.nama_kelas = obj.nama_kelas
+        }
+      })
+    } else {
+      temp.push(obj);
+    }
+  } else {
+    temp.push(obj);
+  }
+  // console.log(temp);
+  // console.log(getTempSekolah);
+  storeGuruBk.setTempSekolah(temp)
+}
+
 </script>
 <template>
   <div class="pt-4 px-10 md:flex justify-between">
     <div>
-      <span class="text-2xl sm:text-3xl leading-none font-bold text-base-content shadow-sm">Siswa</span>
+      <span class="text-2xl sm:text-3xl leading-none font-bold text-base-content shadow-sm">Siswa kelas
+        <!-- {{getDataSekolah }} -->
+        {{
+        getDataSekolah.length>0?getDataSekolah[0].nama_kelas:null }}
+      </span>
     </div>
     <div class="md:py-0 py-4">
       <BreadCrumb>
         <template v-slot:content> Siswa
+          <!-- {{ sekolah_id }} -->
           <BreadCrumbSpace /> Index
         </template>
       </BreadCrumb>
@@ -223,9 +287,9 @@ const doCopyClipboard = (item) => {
           <vue-good-table :columns="columns" :rows="data" :search-options="{
             enabled: true,
           }" :pagination-options="{
-  enabled: true,
-  perPageDropdown: [10, 20, 50],
-}" styleClass="vgt-table striped bordered condensed" class="py-0">
+            enabled: true,
+            perPageDropdown: [10, 20, 50],
+          }" styleClass="vgt-table striped bordered condensed" class="py-0">
             <template #table-row="props">
               <span v-if="props.column.field == 'actions'">
                 <div class="text-sm font-medium text-center flex justify-center">

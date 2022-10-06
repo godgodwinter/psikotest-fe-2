@@ -17,6 +17,14 @@ async function goLogout() {
 }
 const storeAuth = useStoreAuth();
 const storeGuruBk = useStoreGuruBk();
+const sekolah_id = storeGuruBk.getIdentitas ? storeGuruBk.getIdentitas.sekolah_id : null;
+storeGuruBk.$subscribe((mutation, state) => {
+  // console.log(sekolah.value.id);
+
+  let getSekolah_id = storeGuruBk.getIdentitas ? storeGuruBk.getIdentitas.sekolah_id : null;
+  let getDataSekolahSub = fnCariDataTempSekolahWhereSekolahId(getSekolah_id);
+  kelas_id.value = getDataSekolahSub.length > 0 ? getDataSekolahSub[0].kelas_id : null;
+});
 const getIsLogin = computed(() => storeAuth.getIsLogin);
 
 const getIdentitas = computed(() => storeGuruBk.getIdentitas);
@@ -28,6 +36,26 @@ if (getIsLogin.value == false) {
 const pagesActiveClass = ref(
   "border border-primary rounded-lg bg-primary text-primary-content"
 );
+
+const getTempSekolah = computed(() => storeGuruBk.getTempSekolah);
+
+const fnCariDataTempSekolahWhereSekolahId = (id) => {
+  let tempSekolah = storeGuruBk.getTempSekolah;
+  console.log(id, tempSekolah);
+  return tempSekolah ? tempSekolah.filter((item) => item.id == id) : [];
+}
+
+const getDataSekolah = fnCariDataTempSekolahWhereSekolahId(sekolah_id);
+
+// console.log(getData);
+const kelas_id = ref(null);
+if (getDataSekolah.length > 0) {
+  console.log("AdA", getDataSekolah, getDataSekolah[0].kelas_id)
+  kelas_id.value = getDataSekolah ? getDataSekolah[0].kelas_id : null;
+
+} else {
+  console.log("tidak ditemukan");
+}
 </script>
 <template>
   <aside :class="{ hidden: !isSideBarActive }" id="sidebar"
@@ -114,7 +142,7 @@ const pagesActiveClass = ref(
               </router-link>
             </li>
             <li class="lg:w-full py-0" :class="[pagesActive == 'siswa' ? pagesActiveClass : '']">
-              <router-link :to="{ name: 'AdminSiswa' }"
+              <router-link :to="{ name: 'AdminSiswa' , params: { kelas_id } }"
                 class="text-base-content font-normal rounded-lg flex items-center p-2 group hover:link">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
@@ -182,7 +210,7 @@ const pagesActiveClass = ref(
               </router-link>
             </li> -->
             <li class="lg:w-full py-0" :class="[pagesActive == 'hasilpsikologi' ? pagesActiveClass : '']">
-              <router-link :to="{ name: 'AdminHasilPsikologi' }"
+              <router-link :to="{ name: 'AdminHasilPsikologi' , params: { kelas_id } }"
                 class="text-base-content font-normal rounded-lg flex items-center p-2 group hover:link">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd"
@@ -193,7 +221,7 @@ const pagesActiveClass = ref(
               </router-link>
             </li>
             <li class="lg:w-full py-0" :class="[pagesActive == 'nilaipsikologi' ? pagesActiveClass : '']">
-              <router-link :to="{ name: 'AdminNilaiPsikologi' }"
+              <router-link :to="{ name: 'AdminNilaiPsikologi'  , params: { kelas_id }}"
                 class="text-base-content font-normal rounded-lg flex items-center p-2 group hover:link">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd"
@@ -204,7 +232,7 @@ const pagesActiveClass = ref(
               </router-link>
             </li>
             <li class="lg:w-full py-0" :class="[pagesActive == 'minatbakat' ? pagesActiveClass : '']">
-              <router-link :to="{ name: 'AdminAnalisaMinatBakat' }"
+              <router-link :to="{ name: 'AdminAnalisaMinatBakat' , params: { kelas_id } }"
                 class="text-base-content font-normal rounded-lg flex items-center p-2 group hover:link">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd"
@@ -215,7 +243,7 @@ const pagesActiveClass = ref(
               </router-link>
             </li>
             <li class="lg:w-full py-0" :class="[pagesActive == 'penjurusan' ? pagesActiveClass : '']">
-              <router-link :to="{ name: 'AdminAnalisaPenjurusan' }"
+              <router-link :to="{ name: 'AdminAnalisaPenjurusan' , params: { kelas_id } }"
                 class="text-base-content font-normal rounded-lg flex items-center p-2 group hover:link">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path
