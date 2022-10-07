@@ -19,7 +19,7 @@ const dataKelas = ref([]);
 const data = ref([]);
 const dataDetail = ref([]);
 const siswa = ref();
-const sekolah_id = storeGuruBk.getIdentitas ? storeGuruBk.getIdentitas.sekolah_id : null;
+// const sekolah_id = storeGuruBk.getIdentitas ? storeGuruBk.getIdentitas.sekolah_id : null;
 
 const getDataId = async () => {
   try {
