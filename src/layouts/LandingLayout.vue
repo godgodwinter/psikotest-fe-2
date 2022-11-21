@@ -114,8 +114,10 @@ getData();
           Wali Murid
         </h1>
       </a>
-      <a :href="VITE_API_URLFE_UJIAN" target="_blank" class="text-base-content font-normal text-sm hover:link">Ujian
-        Bidang Studi</a>
+
+      <a :href="VITE_API_URLFE_UJIAN" target="_blank" class="text-base-content font-normal text-sm hover:link">
+        <h1 class="text-xs text-base-content font-bold py-2 pt-6">Ujian Bidang Studi</h1>
+      </a>
 
       <!-- <h1 class="text-xs text-gray-400 font-bold py-2">Installation</h1> -->
     </div>
@@ -171,7 +173,9 @@ getData();
                 <a :href="VITE_API_URLFE_SISWA" class="text-base-content font-normal text-sm hover:link">Siswa</a>
                 <a :href="VITE_API_URLFE_ORTU" :to="{ name: 'LandingIndex' }"
                   class="text-base-content font-normal text-sm hover:link">Wali Murid</a>
-
+                <a :href="VITE_API_URLFE_UJIAN" target="_blank"
+                  class="text-base-content font-normal text-sm hover:link">Ujian
+                  Bidang Studi</a>
                 <!-- <a href="https://github.com/godgodwinter" target="blank" class=" text-base-content font-semibold text-sm hover:text-vue-600 hover:link">Github </a> -->
               </div>
             </div>
