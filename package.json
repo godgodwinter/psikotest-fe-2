@@ -1,9 +1,9 @@
 {
-  "name": "my-vue-app",
+  "name": "fe-2",
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --port 3001",
+    "dev": "vite --port 3302 --host",
     "build": "vite build",
     "preview": "vite preview",
     "copy:bk": "vite build && rm -rf ../deploy/d-psikotest/bk && mkdir ../deploy/d-psikotest/bk  && cp -r dist/* ../deploy/d-psikotest/bk && cp -r ../deploy/d-psikotest/.htaccess ../deploy/d-psikotest/bk",
