@@ -3,6 +3,6 @@ services:
     viteapp:
       restart: always
       build: .
-      container_name: fe-6-adminpanel
+      container_name: fe-2-sekolah
       ports:
         - '${APP_PORT}:${APP_PORT}'
